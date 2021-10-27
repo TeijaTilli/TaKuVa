@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".kuitin_lisays_sivu">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="30dp"
+        android:layout_marginStart="30dp"
+        android:layout_marginEnd="30dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/ivImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="#dedede" />
+
+        <Button
+            android:id="@+id/btCapturePhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:background="?attr/colorPrimary"
+            android:text="Capture Photo"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/btOpenGallery"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="?attr/colorAccent"
+            android:text="Open Gallery"
+            android:textColor="#5E35B1" />
+
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/takaisin1Btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="TAKAISIN"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/tallenna1Btn"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/tallenna1Btn"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@android:color/holo_green_light"
+        android:text="TALLENNA"
+        android:textSize="16sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/takaisin1Btn" />
+</androidx.constraintlayout.widget.ConstraintLayout>
