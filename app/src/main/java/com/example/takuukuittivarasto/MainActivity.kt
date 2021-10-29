@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         lisaaTakuukuittiBtn.setOnClickListener { siirryLisaamaanKuittia() }
 
     }
-
+//Jonna
     fun siirryLisaamaanKuittia(){
         val siirry = Intent(this, kuitin_lisays_sivu::class.java)
         startActivity(siirry)
