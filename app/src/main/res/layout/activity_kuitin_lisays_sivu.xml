@@ -8,13 +8,13 @@
 
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         android:layout_centerInParent="true"
-        android:layout_margin="30dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
+        android:layout_margin="15dp"
         android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/takaisin1Btn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -22,29 +22,60 @@
         <ImageView
             android:id="@+id/ivImage"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="318dp"
             android:src="#dedede" />
 
-        <Button
-            android:id="@+id/btCapturePhoto"
+        <LinearLayout
+            android:id="@+id/linearLayoutHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:background="?attr/colorPrimary"
-            android:text="Capture Photo"
-            android:textColor="@android:color/white" />
+            android:layout_height="72dp"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/btOpenGallery"
+            <ImageButton
+                android:id="@+id/btCapturePhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="-5dp"
+                android:layout_marginEnd="0dp"
+                android:layout_weight=".50"
+                android:backgroundTint="#8BC34A"
+                android:scaleType="fitCenter"
+                app:srcCompat="@android:drawable/ic_menu_camera"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageButton
+                android:id="@+id/btOpenGallery"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="0dp"
+                android:layout_marginEnd="-5dp"
+                android:layout_weight=".50"
+                android:backgroundTint="#00BCD4"
+                android:scaleType="fitCenter"
+                app:srcCompat="@android:drawable/ic_menu_gallery"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+        </LinearLayout>
+
+        <EditText
+            android:id="@+id/txtNimi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:background="?attr/colorAccent"
-            android:text="Open Gallery"
-            android:textColor="#5E35B1" />
+            android:layout_marginBottom="15dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Tuotteen nimi" />
+
+        <EditText
+            android:id="@+id/txtTakuuPvm"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="date"
+            android:text="Takuun viimeinen pvm" />
 
     </LinearLayout>
-
 
 
     <Button
@@ -67,4 +98,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/takaisin1Btn" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
