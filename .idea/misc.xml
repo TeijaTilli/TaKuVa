@@ -1,19 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="DesignSurface">
-    <option name="filePathToZoomLevelMap">
-      <map>
-        <entry key="..\:/Users/Roosa Turunen/AndroidStudioProjects/TaKuVa/app/src/main/res/layout/activity_kuitin_lisays_sivu.xml" value="0.17300724637681159" />
-        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/activity_kuitin_lisays.xml" value="0.2" />
-        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/activity_kuitin_lisays_sivu.xml" value="0.2" />
-        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/activity_main.xml" value="0.13405797101449277" />
-      </map>
-    </option>
-  </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
-    <output url="file://$PROJECT_DIR$/build/classes" />
-  </component>
-  <component name="ProjectType">
-    <option name="id" value="Android" />
-  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="11" project-jdk-type="JavaSDK" />
 </project>
