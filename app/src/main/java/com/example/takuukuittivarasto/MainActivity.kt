@@ -7,7 +7,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 
 
-//Roosa Turunen
+//Roosa
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
