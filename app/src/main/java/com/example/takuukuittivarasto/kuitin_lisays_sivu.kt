@@ -24,6 +24,7 @@ class kuitin_lisays_sivu : AppCompatActivity() {
         takaisin1Btn.setOnClickListener { takaisinMainActivityyn() }
 
         btCapturePhoto.setOnClickListener {
+            checkCameraPermission()
             openCamera()
         }
         btOpenGallery.setOnClickListener {
