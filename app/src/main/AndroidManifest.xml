@@ -17,9 +17,6 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Takuukuittivarasto">
         <activity
-            android:name=".kuitin_lisays"
-            android:exported="false" />
-        <activity
             android:name=".kuitin_lisays_sivu"
             android:exported="false" />
         <activity
