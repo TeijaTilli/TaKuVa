@@ -14,11 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import kotlinx.android.synthetic.main.activity_kuitin_lisays_sivu.*
 import java.text.SimpleDateFormat
-import java.time.LocalDate
-import java.time.LocalDateTime
-import java.time.format.DateTimeFormatter
 import java.util.*
-import java.util.Calendar as Calendar
 
 class kuitin_lisays_sivu : AppCompatActivity() {
     private val REQUEST_PERMISSION = 100 //luvat kameran käyttöön ja kuvagallerian
@@ -41,18 +37,18 @@ class kuitin_lisays_sivu : AppCompatActivity() {
         tallenna1Btn.setOnClickListener {
             tallenna()
         }
-        paattypvm.setOnDateChangeListener( CalendarView.OnDateChangeListener{kalenteri, vuosi, kuukausi, paiva ->
-            Log.d("testi", "${paattypvm.date}, $vuosi, $kuukausi, $paiva")
+        pvmTakuu.setOnDateChangeListener( CalendarView.OnDateChangeListener{ kalenteri, vuosi, kuukausi, paiva ->
+            Log.d("testi", "${pvmTakuu.date}, $vuosi, $kuukausi, $paiva")
             var kuukausi_t = kuukausi + 1 //kuukaudet alkaa nollasta joten lisätään 1
             var uusi_date_format = SimpleDateFormat("yyyy-MM-dd") // tehdään jotta voidaan muokata stringi dateksi
             var uusi_date = uusi_date_format.parse("$vuosi-$kuukausi_t-$paiva") // muunnetaan stringi dateksi
-            paattypvm.setDate(uusi_date.time) // laitetaan kalenterin ajaksi tämä, muuten ei päivitä aikaa jostain syystä :)
+            pvmTakuu.setDate(uusi_date.time) // laitetaan kalenterin ajaksi tämä, muuten ei päivitä aikaa jostain syystä :)
         })
     }//onCreate
 
     fun tallenna() {
-        var kuitti = Takuukuitti(1, testiteksti.text.toString(), Date(paattypvm.date), IMAGE_BITMAP)
-        Log.d("testi", "${paattypvm.getDate()}")
+        var kuitti = Takuukuitti(1, txtNimi.text.toString(), Date(pvmTakuu.date), IMAGE_BITMAP)
+        Log.d("testi", "${pvmTakuu.getDate()}")
         Log.d("testi", "${kuitti.toString()}")
     }
     fun takaisinMainActivityyn(){
