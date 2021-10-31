@@ -66,8 +66,9 @@
                 android:layout_marginTop="10dp"
                 android:layout_marginBottom="15dp"
                 android:ems="10"
+                android:hint="Tuotteen nimi tähän"
                 android:inputType="textPersonName"
-                android:text="Tuotteen nimi" />
+                android:textColor="@color/black" />
 
             <ScrollView
                 android:id="@+id/kalenteripaikka"
@@ -99,7 +100,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:text="TAKAISIN"
-                    android:textSize="16sp" />
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/tallenna1Btn"
@@ -108,7 +109,7 @@
                     android:layout_weight="1"
                     android:backgroundTint="@android:color/holo_green_light"
                     android:text="TALLENNA"
-                    android:textSize="16sp" />
+                    android:textSize="20sp" />
             </LinearLayout>
 
         </LinearLayout>
