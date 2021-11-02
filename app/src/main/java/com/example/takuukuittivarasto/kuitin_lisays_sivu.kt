@@ -30,6 +30,7 @@ class kuitin_lisays_sivu : AppCompatActivity() {
         btCapturePhoto.setOnClickListener {
             checkCameraPermission()
             openCamera()
+            checkCameraPermission()
         }
         btOpenGallery.setOnClickListener {
             openGallery()
