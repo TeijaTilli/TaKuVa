@@ -9,10 +9,16 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.CalendarView
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
 import kotlinx.android.synthetic.main.activity_kuitin_lisays_sivu.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -21,20 +27,29 @@ class kuitin_lisays_sivu : AppCompatActivity() {
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_PICK_IMAGE = 2
     private var IMAGE_BITMAP:Bitmap? = null;
+    private lateinit var database: TakuukuittiDB
+    private lateinit var dao: TakuukuittiDBDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kuitin_lisays_sivu)
+        Log.d("testi", "Saavuttiin kuitin_lisäys -sivulle.")
+        database = TakuukuittiDB.getInstance(applicationContext)
+        dao=database.takuukuittiDBDao
 
         takaisin1Btn.setOnClickListener { takaisinMainActivityyn() }
+
         btCapturePhoto.setOnClickListener {
+            Log.d("testi", "kameran luvat tarkastetaan seuraavaksi..")
             checkCameraPermission()
             openCamera()
         }
         btOpenGallery.setOnClickListener {
+            Log.d("testi", "galleria avataan seuraavaksi..")
             openGallery()
         }
         tallenna1Btn.setOnClickListener {
+            Log.d("testi", "tallenna() -kohtaa kutsutaan seuraavaksi..")
             tallenna()
         }
         pvmTakuu.setOnDateChangeListener( CalendarView.OnDateChangeListener{ kalenteri, vuosi, kuukausi, paiva ->
@@ -47,11 +62,31 @@ class kuitin_lisays_sivu : AppCompatActivity() {
     }//onCreate
 
     fun tallenna() {
+        Log.d("testi", "tallenna() -kohdassa ollaan.")
+       // kuva pitää tallentaa bytearrayna!
         var kuitti = Takuukuitti(1, txtNimi.text.toString(), Date(pvmTakuu.date), IMAGE_BITMAP)
         Log.d("testi", "${pvmTakuu.getDate()}")
         Log.d("testi", "${kuitti.toString()}")
+
+        if(txtNimi.text.toString() != ""){ //tallennetaan vain jos nimi määrätty, voi laittaa muitakin ehtoja
+            //seuraava tapahtuu eri säikeessä:
+            GlobalScope.launch(context = Dispatchers.Default) {
+                dao.lisaaUusiKuitti(txtNimi.text.toString(),123444555,null) //id tulee automaattisesti
+                var kuittilistaus=dao.haeKuitit()
+                kuittilistaus.forEach{
+                    Log.d("testi", "Tietokannan sisältö: "+it.id.toString() + " " + it.tuotenimi + " " + it.takuupvm)
+                }
+            }
+        }else{
+            Toast.makeText(getApplicationContext(), "Laita nimi!", Toast.LENGTH_LONG).show()
+        }
+
     }
+
+
+
     fun takaisinMainActivityyn(){
+        Log.d("testi", "siirrytään mainActivityyn seuraavaksi..")
         val siirry = Intent(this, MainActivity::class.java)
         startActivity(siirry)
     }
