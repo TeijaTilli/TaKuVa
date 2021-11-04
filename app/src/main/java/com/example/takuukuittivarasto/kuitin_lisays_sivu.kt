@@ -48,7 +48,7 @@ class kuitin_lisays_sivu : AppCompatActivity() {
             Log.d("testi", "galleria avataan seuraavaksi..")
             openGallery()
         }
-        tallenna1Btn.setOnClickListener {
+        tallennaBtn.setOnClickListener {
             Log.d("testi", "tallenna() -kohtaa kutsutaan seuraavaksi..")
             tallenna()
         }
@@ -71,7 +71,7 @@ class kuitin_lisays_sivu : AppCompatActivity() {
         if(txtNimi.text.toString() != ""){ //tallennetaan vain jos nimi määrätty, voi laittaa muitakin ehtoja
             //seuraava tapahtuu eri säikeessä:
             GlobalScope.launch(context = Dispatchers.Default) {
-                dao.lisaaUusiKuitti(txtNimi.text.toString(),123444555,null) //id tulee automaattisesti
+                dao.lisaaUusiKuitti(txtNimi.text.toString(),123444555,"") //id tulee automaattisesti
                 var kuittilistaus=dao.haeKuitit()
                 kuittilistaus.forEach{
                     Log.d("testi", "Tietokannan sisältö: "+it.id.toString() + " " + it.tuotenimi + " " + it.takuupvm)
@@ -126,13 +126,13 @@ class kuitin_lisays_sivu : AppCompatActivity() {
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 val bitmap = data?.extras?.get("data") as Bitmap
-                ivImage.setImageBitmap(bitmap)
-                IMAGE_BITMAP = ivImage.drawable.toBitmap()
+                ivKuitti.setImageBitmap(bitmap)
+                IMAGE_BITMAP = ivKuitti.drawable.toBitmap()
             }
             else if (requestCode == REQUEST_PICK_IMAGE) {
                 val uri = data?.getData()
-                ivImage.setImageURI(uri)
-                IMAGE_BITMAP = ivImage.drawable.toBitmap()
+                ivKuitti.setImageURI(uri)
+                IMAGE_BITMAP = ivKuitti.drawable.toBitmap()
             }
         }
     }

@@ -29,14 +29,14 @@ data class Kuitti(  //luodaan taulu
     //@ColumnInfo(name="takuupvm") val takuupvm:Date,
     @ColumnInfo(name="takuupvm") val takuupvm:Long, //pitää tallentaa longina päivämäärä
     //@ColumnInfo(name="kuva") val kuva:Bitmap //https://stackoverflow.com/questions/46337519/how-insert-image-in-room-persistence-library
-    @ColumnInfo(name="kuva") val data: ByteArray? = null //pitää muuttaa BLOB:ksi? https://stackoverflow.com/questions/46337519/how-insert-image-in-room-persistence-library
+    @ColumnInfo(name="kuva") val data: String //pitää muuttaa BLOB:ksi? https://stackoverflow.com/questions/46337519/how-insert-image-in-room-persistence-library
 )
 
 //tietokantaliitäntä jonka avullakäsitellään tietokantaa ohjelmassa
 @Dao //Databaseaccess -objekti
 interface TakuukuittiDBDao{
     @Query("INSERT INTO kuitti (tuotenimi, takuupvm, kuva) VALUES (:tuotenimi, :takuupvm, :kuva);")
-    fun lisaaUusiKuitti(tuotenimi:String, takuupvm: Long, kuva: ByteArray? = null)
+    fun lisaaUusiKuitti(tuotenimi:String, takuupvm: Long, kuva: String)
 
     @Query("SELECT * FROM kuitti ORDER BY takuupvm;")
     fun haeKuitit() : List<Kuitti>
