@@ -22,7 +22,7 @@
             android:orientation="vertical">
 
             <ImageView
-                android:id="@+id/ivImage"
+                android:id="@+id/ivKuitti"
                 android:layout_width="match_parent"
                 android:layout_height="290dp"
                 android:src="#dedede" />
@@ -103,7 +103,7 @@
                     android:textSize="20sp" />
 
                 <Button
-                    android:id="@+id/tallenna1Btn"
+                    android:id="@+id/poistaBtn"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
