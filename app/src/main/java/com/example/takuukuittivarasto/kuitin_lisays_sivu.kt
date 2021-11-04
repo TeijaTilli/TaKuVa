@@ -35,7 +35,7 @@ class kuitin_lisays_sivu : AppCompatActivity() {
         btOpenGallery.setOnClickListener {
             openGallery()
         }
-        tallenna1Btn.setOnClickListener {
+        poistaBtn.setOnClickListener {
             tallenna()
         }
         pvmTakuu.setOnDateChangeListener( CalendarView.OnDateChangeListener{ kalenteri, vuosi, kuukausi, paiva ->
@@ -92,13 +92,13 @@ class kuitin_lisays_sivu : AppCompatActivity() {
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 val bitmap = data?.extras?.get("data") as Bitmap
-                ivImage.setImageBitmap(bitmap)
-                IMAGE_BITMAP = ivImage.drawable.toBitmap()
+                ivKuitti.setImageBitmap(bitmap)
+                IMAGE_BITMAP = ivKuitti.drawable.toBitmap()
             }
             else if (requestCode == REQUEST_PICK_IMAGE) {
                 val uri = data?.getData()
-                ivImage.setImageURI(uri)
-                IMAGE_BITMAP = ivImage.drawable.toBitmap()
+                ivKuitti.setImageURI(uri)
+                IMAGE_BITMAP = ivKuitti.drawable.toBitmap()
             }
         }
     }

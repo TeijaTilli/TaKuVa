@@ -20,6 +20,9 @@
             android:name=".kuittivarasto"
             android:exported="true" />
         <activity
+            android:name=".kuitinTarkastelu"
+            android:exported="true" />
+        <activity
             android:name=".kuitin_lisays_sivu"
             android:exported="false" />
         <activity
