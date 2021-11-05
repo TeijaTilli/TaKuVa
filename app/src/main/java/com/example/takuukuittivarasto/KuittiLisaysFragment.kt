@@ -42,6 +42,8 @@ class KuittiLisaysFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        database = TakuukuittiDB.getInstance(requireContext())
+        dao=database.takuukuittiDBDao
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_kuitti_lisays, container, false)
         binding.btCapturePhoto.setOnClickListener {

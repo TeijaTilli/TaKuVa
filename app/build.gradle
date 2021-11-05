@@ -17,7 +17,7 @@ android {
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    buildFeatures {
+    buildFeatures { //lisätty
         dataBinding true
     }
     buildTypes {
