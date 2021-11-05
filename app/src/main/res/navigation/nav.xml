@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/mainFragment">
+
+    <fragment
+        android:id="@+id/mainFragment"
+        android:name="com.example.takuukuittivarasto.MainFragment"
+        android:label="fragment_main"
+        tools:layout="@layout/fragment_main" >
+        <action
+            android:id="@+id/action_mainFragment_to_kuittiLisaysFragment"
+            app:destination="@id/kuittiLisaysFragment"
+            app:enterAnim="@android:anim/fade_in"
+            app:exitAnim="@android:anim/fade_out" />
+        <action
+            android:id="@+id/action_mainFragment_to_kuittiVarastoFragment"
+            app:destination="@id/kuittiVarastoFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/kuittiLisaysFragment"
+        android:name="com.example.takuukuittivarasto.KuittiLisaysFragment"
+        android:label="fragment_kuitti_lisays"
+        tools:layout="@layout/fragment_kuitti_lisays" >
+        <action
+            android:id="@+id/action_kuittiLisaysFragment_to_mainFragment"
+            app:destination="@id/mainFragment" />
+        <action
+            android:id="@+id/action_kuittiLisaysFragment_to_takuuPvmValitsinFragment"
+            app:destination="@id/takuuPvmValitsinFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/kuitinTarkasteluFragment"
+        android:name="com.example.takuukuittivarasto.KuitinTarkasteluFragment"
+        android:label="fragment_kuitin_tarkastelu"
+        tools:layout="@layout/fragment_kuitin_tarkastelu" >
+        <action
+            android:id="@+id/action_kuitinTarkasteluFragment_to_kuittiVarastoFragment"
+            app:destination="@id/kuittiVarastoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/kuittiVarastoFragment"
+        android:name="com.example.takuukuittivarasto.KuittiVarastoFragment"
+        android:label="fragment_kuitti_varasto"
+        tools:layout="@layout/fragment_kuitti_varasto" >
+        <action
+            android:id="@+id/action_kuittiVarastoFragment_to_mainFragment"
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/slide_in_left"
+            app:exitAnim="@android:anim/slide_out_right"
+            app:popEnterAnim="@android:anim/slide_in_left"
+            app:popExitAnim="@android:anim/slide_out_right" />
+        <action
+            android:id="@+id/action_kuittiVarastoFragment_to_kuitinTarkasteluFragment"
+            app:destination="@id/kuitinTarkasteluFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/takuuPvmValitsinFragment"
+        android:name="com.example.takuukuittivarasto.takuuPvmValitsinFragment"
+        android:label="fragment_takuu_pvm_valitsin"
+        tools:layout="@layout/fragment_takuu_pvm_valitsin" >
+        <action
+            android:id="@+id/action_takuuPvmValitsinFragment_to_kuittiLisaysFragment"
+            app:destination="@id/kuittiLisaysFragment" />
+    </fragment>
+</navigation>

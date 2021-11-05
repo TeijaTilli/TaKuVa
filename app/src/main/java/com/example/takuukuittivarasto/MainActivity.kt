@@ -15,19 +15,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        lisaaTakuukuittiBtn.setOnClickListener { siirryLisaamaanKuittia() }
-        katsoKuittejaBtn.setOnClickListener { katsoKuitteja() }
-
     }
 //Jonna
-    fun siirryLisaamaanKuittia(){
-        val siirry = Intent(this, kuitin_lisays_sivu::class.java)
-        startActivity(siirry)
-    }
-    fun katsoKuitteja(){
-        val siirry = Intent(this, kuittivarasto::class.java)
-        startActivity(siirry)
-    }
-
 } //MainActivity loppuu

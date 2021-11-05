@@ -52,20 +52,20 @@ class kuitin_lisays_sivu : AppCompatActivity() {
             Log.d("testi", "tallenna() -kohtaa kutsutaan seuraavaksi..")
             tallenna()
         }
-        pvmTakuu.setOnDateChangeListener( CalendarView.OnDateChangeListener{ kalenteri, vuosi, kuukausi, paiva ->
+        /*pvmTakuu.setOnDateChangeListener( CalendarView.OnDateChangeListener{ kalenteri, vuosi, kuukausi, paiva ->
             Log.d("testi", "${pvmTakuu.date}, $vuosi, $kuukausi, $paiva")
             var kuukausi_t = kuukausi + 1 //kuukaudet alkaa nollasta joten lisätään 1
             var uusi_date_format = SimpleDateFormat("yyyy-MM-dd") // tehdään jotta voidaan muokata stringi dateksi
             var uusi_date = uusi_date_format.parse("$vuosi-$kuukausi_t-$paiva") // muunnetaan stringi dateksi
             pvmTakuu.setDate(uusi_date.time) // laitetaan kalenterin ajaksi tämä, muuten ei päivitä aikaa jostain syystä :)
-        })
+        })*/
     }//onCreate
 
     fun tallenna() {
         Log.d("testi", "tallenna() -kohdassa ollaan.")
        // kuva pitää tallentaa bytearrayna!
-        var kuitti = Takuukuitti(1, txtNimi.text.toString(), Date(pvmTakuu.date), IMAGE_BITMAP)
-        Log.d("testi", "${pvmTakuu.getDate()}")
+        var kuitti = Takuukuitti(1, txtNimi.text.toString(), Date(), IMAGE_BITMAP)
+
         Log.d("testi", "${kuitti.toString()}")
 
         if(txtNimi.text.toString() != ""){ //tallennetaan vain jos nimi määrätty, voi laittaa muitakin ehtoja
