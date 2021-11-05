@@ -17,6 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Takuukuittivarasto">
         <activity
+            android:name=".kuittivarasto"
+            android:exported="true" />
+        <activity
+            android:name=".kuitinTarkastelu"
+            android:exported="true" />
+        <activity
             android:name=".takuuPvmValitsin"
             android:exported="true" />
         <activity

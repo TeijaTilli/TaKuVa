@@ -1,22 +1,24 @@
 package com.example.takuukuittivarasto
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.AttributeSet
 import android.util.Log
-import android.view.View
 import android.widget.CalendarView
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
-import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_kuitin_lisays_sivu.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -25,43 +27,66 @@ class kuitin_lisays_sivu : AppCompatActivity() {
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_PICK_IMAGE = 2
     private var IMAGE_BITMAP:Bitmap? = null;
-    private var TAKUUPVM:Date = Date();
-    private lateinit var viewModel:LisattavaKuitti
+    private lateinit var database: TakuukuittiDB
+    private lateinit var dao: TakuukuittiDBDao
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kuitin_lisays_sivu)
-
+        Log.d("testi", "Saavuttiin kuitin_lisäys -sivulle.")
+        database = TakuukuittiDB.getInstance(applicationContext)
+        dao=database.takuukuittiDBDao
 
         takaisin1Btn.setOnClickListener { takaisinMainActivityyn() }
-        Log.d("testi", "init kuitin lisays")
+
         btCapturePhoto.setOnClickListener {
+            Log.d("testi", "kameran luvat tarkastetaan seuraavaksi..")
             checkCameraPermission()
             openCamera()
         }
         btOpenGallery.setOnClickListener {
+            Log.d("testi", "galleria avataan seuraavaksi..")
             openGallery()
         }
-        tallenna1Btn.setOnClickListener {
+        tallennaBtn.setOnClickListener {
+            Log.d("testi", "tallenna() -kohtaa kutsutaan seuraavaksi..")
             tallenna()
         }
-        btKalenteriin.setOnClickListener {
-            val siirry = Intent(this, takuuPvmValitsin::class.java)
-            startActivity(siirry)
-        }
+        pvmTakuu.setOnDateChangeListener( CalendarView.OnDateChangeListener{ kalenteri, vuosi, kuukausi, paiva ->
+            Log.d("testi", "${pvmTakuu.date}, $vuosi, $kuukausi, $paiva")
+            var kuukausi_t = kuukausi + 1 //kuukaudet alkaa nollasta joten lisätään 1
+            var uusi_date_format = SimpleDateFormat("yyyy-MM-dd") // tehdään jotta voidaan muokata stringi dateksi
+            var uusi_date = uusi_date_format.parse("$vuosi-$kuukausi_t-$paiva") // muunnetaan stringi dateksi
+            pvmTakuu.setDate(uusi_date.time) // laitetaan kalenterin ajaksi tämä, muuten ei päivitä aikaa jostain syystä :)
+        })
     }//onCreate
 
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-        viewModel = ViewModelProvider(this).get(LisattavaKuitti::class.java)
-        Log.d("testi", viewModel.takuupvm.toString())
-        return super.onCreateView(name, context, attrs)
-    }
     fun tallenna() {
-        var kuitti = Takuukuitti(1, txtNimi.text.toString(), TAKUUPVM, IMAGE_BITMAP)
-        Log.d("testi", "${TAKUUPVM}")
+        Log.d("testi", "tallenna() -kohdassa ollaan.")
+       // kuva pitää tallentaa bytearrayna!
+        var kuitti = Takuukuitti(1, txtNimi.text.toString(), Date(pvmTakuu.date), IMAGE_BITMAP)
+        Log.d("testi", "${pvmTakuu.getDate()}")
         Log.d("testi", "${kuitti.toString()}")
+
+        if(txtNimi.text.toString() != ""){ //tallennetaan vain jos nimi määrätty, voi laittaa muitakin ehtoja
+            //seuraava tapahtuu eri säikeessä:
+            GlobalScope.launch(context = Dispatchers.Default) {
+                dao.lisaaUusiKuitti(txtNimi.text.toString(),123444555,"") //id tulee automaattisesti
+                var kuittilistaus=dao.haeKuitit()
+                kuittilistaus.forEach{
+                    Log.d("testi", "Tietokannan sisältö: "+it.id.toString() + " " + it.tuotenimi + " " + it.takuupvm)
+                }
+            }
+        }else{
+            Toast.makeText(getApplicationContext(), "Laita nimi!", Toast.LENGTH_LONG).show()
+        }
+
     }
+
+
+
     fun takaisinMainActivityyn(){
+        Log.d("testi", "siirrytään mainActivityyn seuraavaksi..")
         val siirry = Intent(this, MainActivity::class.java)
         startActivity(siirry)
     }
@@ -101,13 +126,13 @@ class kuitin_lisays_sivu : AppCompatActivity() {
         if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 val bitmap = data?.extras?.get("data") as Bitmap
-                ivImage.setImageBitmap(bitmap)
-                IMAGE_BITMAP = ivImage.drawable.toBitmap()
+                ivKuitti.setImageBitmap(bitmap)
+                IMAGE_BITMAP = ivKuitti.drawable.toBitmap()
             }
             else if (requestCode == REQUEST_PICK_IMAGE) {
-                val uri = data?.data
-                ivImage.setImageURI(uri)
-                IMAGE_BITMAP = ivImage.drawable.toBitmap()
+                val uri = data?.getData()
+                ivKuitti.setImageURI(uri)
+                IMAGE_BITMAP = ivKuitti.drawable.toBitmap()
             }
         }
     }
