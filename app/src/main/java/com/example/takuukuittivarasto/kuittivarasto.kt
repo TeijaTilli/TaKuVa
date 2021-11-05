@@ -35,27 +35,3 @@ class kuittivarasto : AppCompatActivity() {
         }
     }
 }
-
-class KuittiAdapteri: RecyclerView.Adapter<KuittiAdapteri.ViewHolder>(){
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.kuittirivi, parent, false)
-        return ViewHolder(view)
-    }
-
-    override fun getItemCount() = kuittivarasto.kuitit.size
-
-    override fun onBindViewHolder(holder: ViewHolder, position: Int){
-        val kuitit = kuittivarasto.kuitit
-        val num = kuitit.size
-        val kuitti = kuitit[position%num]
-        Log.d("JKR", "Kuitti")
-        holder.bind(kuitti)
-    }
-
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val button: Button = itemView.findViewById(R.id.btKuitti)
-        fun bind(item: Takuukuitti){
-            button.setText(item.otsikko)
-        }
-    }
-}
