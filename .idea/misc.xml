@@ -10,6 +10,8 @@
         <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.12685185185185185" />
         <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_kuitin_lisays_sivu.xml" value="0.20199275362318841" />
+        <entry key="app/src/main/res/layout/activity_takuu_pvm_valitsin.xml" value="0.20199275362318841" />
       </map>
     </option>
   </component>

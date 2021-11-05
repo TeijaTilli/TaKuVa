@@ -1,17 +1,21 @@
 package com.example.takuukuittivarasto
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.AttributeSet
 import android.util.Log
+import android.view.View
 import android.widget.CalendarView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.lifecycle.ViewModelProvider
 import kotlinx.android.synthetic.main.activity_kuitin_lisays_sivu.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,12 +25,16 @@ class kuitin_lisays_sivu : AppCompatActivity() {
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_PICK_IMAGE = 2
     private var IMAGE_BITMAP:Bitmap? = null;
+    private var TAKUUPVM:Date = Date();
+    private lateinit var viewModel:LisattavaKuitti
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_kuitin_lisays_sivu)
 
+
         takaisin1Btn.setOnClickListener { takaisinMainActivityyn() }
+        Log.d("testi", "init kuitin lisays")
         btCapturePhoto.setOnClickListener {
             checkCameraPermission()
             openCamera()
@@ -37,18 +45,20 @@ class kuitin_lisays_sivu : AppCompatActivity() {
         tallenna1Btn.setOnClickListener {
             tallenna()
         }
-        pvmTakuu.setOnDateChangeListener( CalendarView.OnDateChangeListener{ kalenteri, vuosi, kuukausi, paiva ->
-            Log.d("testi", "${pvmTakuu.date}, $vuosi, $kuukausi, $paiva")
-            var kuukausi_t = kuukausi + 1 //kuukaudet alkaa nollasta joten lisätään 1
-            var uusi_date_format = SimpleDateFormat("yyyy-MM-dd") // tehdään jotta voidaan muokata stringi dateksi
-            var uusi_date = uusi_date_format.parse("$vuosi-$kuukausi_t-$paiva") // muunnetaan stringi dateksi
-            pvmTakuu.setDate(uusi_date.time) // laitetaan kalenterin ajaksi tämä, muuten ei päivitä aikaa jostain syystä :)
-        })
+        btKalenteriin.setOnClickListener {
+            val siirry = Intent(this, takuuPvmValitsin::class.java)
+            startActivity(siirry)
+        }
     }//onCreate
 
+    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
+        viewModel = ViewModelProvider(this).get(LisattavaKuitti::class.java)
+        Log.d("testi", viewModel.takuupvm.toString())
+        return super.onCreateView(name, context, attrs)
+    }
     fun tallenna() {
-        var kuitti = Takuukuitti(1, txtNimi.text.toString(), Date(pvmTakuu.date), IMAGE_BITMAP)
-        Log.d("testi", "${pvmTakuu.getDate()}")
+        var kuitti = Takuukuitti(1, txtNimi.text.toString(), TAKUUPVM, IMAGE_BITMAP)
+        Log.d("testi", "${TAKUUPVM}")
         Log.d("testi", "${kuitti.toString()}")
     }
     fun takaisinMainActivityyn(){
@@ -95,7 +105,7 @@ class kuitin_lisays_sivu : AppCompatActivity() {
                 IMAGE_BITMAP = ivImage.drawable.toBitmap()
             }
             else if (requestCode == REQUEST_PICK_IMAGE) {
-                val uri = data?.getData()
+                val uri = data?.data
                 ivImage.setImageURI(uri)
                 IMAGE_BITMAP = ivImage.drawable.toBitmap()
             }
