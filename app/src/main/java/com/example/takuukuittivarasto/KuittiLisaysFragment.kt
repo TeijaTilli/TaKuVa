@@ -13,9 +13,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.example.takuukuittivarasto.databinding.FragmentKuittiLisaysBinding;
 import kotlinx.android.synthetic.main.activity_kuitin_lisays_sivu.*
 import kotlinx.coroutines.Dispatchers
@@ -42,10 +45,18 @@ class KuittiLisaysFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         database = TakuukuittiDB.getInstance(requireContext())
         dao=database.takuukuittiDBDao
+
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_kuitti_lisays, container, false)
+
+        // Takaisin main-fragmenttiin:
+        binding.takaisin11Btn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_kuittiLisaysFragment_to_mainFragment)
+        }
+
         binding.btCapturePhoto.setOnClickListener {
             checkCameraPermission()
             openCamera()
@@ -57,6 +68,12 @@ class KuittiLisaysFragment : Fragment() {
             tallenna()
         }
         return binding.root
+    }
+
+    //seuraavat funktiot kuvien ottoa varten:
+    override fun onResume() {
+        super.onResume()
+        checkCameraPermission()
     }
     private fun checkCameraPermission() {
         if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CAMERA)
@@ -104,4 +121,22 @@ class KuittiLisaysFragment : Fragment() {
             }
         }
     }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (resultCode == AppCompatActivity.RESULT_OK) {
+            if (requestCode == REQUEST_IMAGE_CAPTURE) {
+                val bitmap = data?.extras?.get("data") as Bitmap
+                ivKuitti.setImageBitmap(bitmap)
+                IMAGE_BITMAP = ivKuitti.drawable.toBitmap()
+            }
+            else if (requestCode == REQUEST_PICK_IMAGE) {
+                val uri = data?.getData()
+                ivKuitti.setImageURI(uri)
+                IMAGE_BITMAP = ivKuitti.drawable.toBitmap()
+            }
+        }
+    }
+
+
 }
