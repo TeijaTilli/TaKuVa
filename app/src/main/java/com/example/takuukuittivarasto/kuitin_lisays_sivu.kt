@@ -8,9 +8,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.widget.CalendarView
-import android.widget.ImageView
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
@@ -19,7 +16,6 @@ import kotlinx.android.synthetic.main.activity_kuitin_lisays_sivu.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
 import java.util.*
 
 class kuitin_lisays_sivu : AppCompatActivity() {
@@ -37,7 +33,7 @@ class kuitin_lisays_sivu : AppCompatActivity() {
         database = TakuukuittiDB.getInstance(applicationContext)
         dao=database.takuukuittiDBDao
 
-        takaisin1Btn.setOnClickListener { takaisinMainActivityyn() }
+        takaisin11Btn.setOnClickListener { takaisinMainActivityyn() }
 
         btCapturePhoto.setOnClickListener {
             Log.d("testi", "kameran luvat tarkastetaan seuraavaksi..")
@@ -63,9 +59,8 @@ class kuitin_lisays_sivu : AppCompatActivity() {
 
     fun tallenna() {
         Log.d("testi", "tallenna() -kohdassa ollaan.")
-       // kuva pitää tallentaa bytearrayna!
+       // kuva pitää tallentaa bytearrayna!.. tai tallentaa tiedostoon...
         var kuitti = Takuukuitti(1, txtNimi.text.toString(), Date(), IMAGE_BITMAP)
-
         Log.d("testi", "${kuitti.toString()}")
 
         if(txtNimi.text.toString() != ""){ //tallennetaan vain jos nimi määrätty, voi laittaa muitakin ehtoja

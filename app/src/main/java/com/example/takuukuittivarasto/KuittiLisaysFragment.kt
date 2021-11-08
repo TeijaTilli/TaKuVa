@@ -4,7 +4,6 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
@@ -14,10 +13,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
 import com.example.takuukuittivarasto.databinding.FragmentKuittiLisaysBinding;
 import kotlinx.android.synthetic.main.activity_kuitin_lisays_sivu.*
@@ -37,7 +34,6 @@ class KuittiLisaysFragment : Fragment() {
     private val REQUEST_PERMISSION = 100 //luvat kameran käyttöön ja kuvagallerian
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_PICK_IMAGE = 2
-    private var IMAGE_URI : Uri? = null;
     private var IMAGE_BITMAP: Bitmap? = null;
     private lateinit var database: TakuukuittiDB
     private lateinit var dao: TakuukuittiDBDao
@@ -108,6 +104,7 @@ class KuittiLisaysFragment : Fragment() {
             }
         }
     }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == AppCompatActivity.RESULT_OK) {
@@ -119,8 +116,10 @@ class KuittiLisaysFragment : Fragment() {
             else if (requestCode == REQUEST_PICK_IMAGE) {
                 val uri = data?.getData()
                 ivKuitti.setImageURI(uri)
-                IMAGE_URI = uri;
+                IMAGE_BITMAP = ivKuitti.drawable.toBitmap()
             }
         }
     }
+
+
 }
