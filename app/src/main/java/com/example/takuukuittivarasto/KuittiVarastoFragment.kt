@@ -12,7 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.takuukuittivarasto.databinding.FragmentKuittiVarastoBinding
 import kotlinx.android.synthetic.main.activity_kuittivarasto.*
+import java.lang.Exception
 import java.util.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass.
@@ -21,16 +25,27 @@ import java.util.*
  */
 class KuittiVarastoFragment : Fragment() {
     private lateinit var binding : FragmentKuittiVarastoBinding
+    private lateinit var tietokanta: TakuukuittiDB
+    private lateinit var dao: TakuukuittiDBDao
+    companion object{
+        var kuitit: List<Kuitti> = mutableListOf<Kuitti>()
 
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        //Tietokannan lisääminen
+        tietokanta = TakuukuittiDB.getInstance(requireContext())
+        dao = tietokanta.takuukuittiDBDao
+
+        GlobalScope.launch(context = Dispatchers.Default) {
+            kuitit = dao.haeKuitit()
+        }
+
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_kuitti_varasto, container, false)
-        kuittivarasto.kuitit = listOf(Takuukuitti(1, "kuitti", Date(2022, 12, 2), null),
-            Takuukuitti(2, "kuitti2", Date(2033, 11, 4), null)) as MutableList<Takuukuitti>
         binding.kuittiRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = KuittiAdapteri()
@@ -45,20 +60,20 @@ class KuittiAdapteri: RecyclerView.Adapter<KuittiAdapteri.ViewHolder>(){
         return ViewHolder(view)
     }
 
-    override fun getItemCount() = kuittivarasto.kuitit.size
+    override fun getItemCount() = KuittiVarastoFragment.kuitit.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int){
-        val kuitit = kuittivarasto.kuitit
-        val num = kuitit.size
-        val kuitti = kuitit[position%num]
+        val kuitteja = KuittiVarastoFragment.kuitit
+        val num = kuitteja.size
+        val kuitti = kuitteja[position%num]
         Log.d("JKR", "Kuitti")
         holder.bind(kuitti)
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val button: Button = itemView.findViewById(R.id.btKuitti)
-        fun bind(item: Takuukuitti){
-            button.setText(item.otsikko)
+        fun bind(item: Kuitti){
+            button.setText(item.tuotenimi)
         }
     }
 }
