@@ -1,5 +1,7 @@
 package com.example.takuukuittivarasto
 
+import android.app.AlertDialog
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -7,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.example.takuukuittivarasto.databinding.FragmentKuitinTarkasteluBinding;
 import kotlinx.android.synthetic.main.fragment_kuitin_tarkastelu.*
 import kotlinx.coroutines.Dispatchers
@@ -36,6 +39,10 @@ class KuitinTarkasteluFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_kuitin_tarkastelu, container, false)
 
+        binding.btnTakaisin.setOnClickListener {
+            it.findNavController().navigate(R.id.action_kuitinTarkasteluFragment_to_kuittiVarastoFragment)
+        }
+
         binding.poistaBtn.setOnClickListener {
             poista()
         }
@@ -58,6 +65,20 @@ class KuitinTarkasteluFragment : Fragment() {
     }
 
     fun poista() {
-        dao.poistaKuitti(kuitinId)
+        val builder = AlertDialog.Builder(requireActivity())
+        builder.setMessage("Oletko varma, että haluat poistaa tämän kuitin?")
+            .setNegativeButton("Takaisin",DialogInterface.OnClickListener {
+                    dialog, id ->
+                //dialog.dismiss()
+            })
+            .setPositiveButton("Kyllä", DialogInterface.OnClickListener {
+                    dialog, id ->
+                dao.poistaKuitti(kuitinId)
+
+            })
+
+        val alert = builder.create()
+        alert.setTitle("Poista kuitti")
+        alert.show()
     }
 }
