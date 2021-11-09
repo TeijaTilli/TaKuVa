@@ -163,8 +163,9 @@ class KuittiLisaysFragment : Fragment() {
         val foStream: FileOutputStream
         try { // mikä formaatti kuvalle? .jpg? .jpeg? .png?
             foStream = context.openFileOutput(imageName.toString() +".jpg", Context.MODE_PRIVATE)
-            b.compress(Bitmap.CompressFormat.PNG, 100, foStream)
+            b.compress(Bitmap.CompressFormat.JPEG, 100, foStream)
             foStream.close()
+            d("testi", "kirjoitettu kuva tiedostoon: " + foStream)
         } catch (e: Exception) {
             Log.d("testi", "Exception 2, Jokin meni pieleen kuvan lisäyksessä tiedostoon!")
             e.printStackTrace()
