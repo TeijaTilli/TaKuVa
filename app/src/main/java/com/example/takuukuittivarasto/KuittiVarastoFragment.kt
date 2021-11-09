@@ -43,14 +43,18 @@ class KuittiVarastoFragment : Fragment() {
         dao = tietokanta.takuukuittiDBDao
 
         GlobalScope.launch(context = Dispatchers.Default) {
+            Log.d("testi", "Thread")
             kuitit = dao.haeKuitit()
+            Log.d("testi", kuitit.toString())
         }
 
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_kuitti_varasto, container, false)
         binding.kuittiRecyclerView.apply {
+            Log.d("testi", "recyclerview.apply->")
             layoutManager = LinearLayoutManager(requireContext())
             adapter = KuittiAdapteri()
+            Log.d("testi", "<-recyclerview.apply")
         }
         Log.d("testi", "binding.root seuraavaksi....")
         return binding.root
@@ -58,14 +62,20 @@ class KuittiVarastoFragment : Fragment() {
 
 }
 class KuittiAdapteri: RecyclerView.Adapter<KuittiAdapteri.ViewHolder>(){
+    init {
+        Log.d("testi", "kuittiadapteri.init")
+    }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        Log.d("testi", "onCreateViewHolder")
         val view = LayoutInflater.from(parent.context).inflate(R.layout.kuittirivi, parent, false)
+
         return ViewHolder(view)
     }
 
     override fun getItemCount() = KuittiVarastoFragment.kuitit.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int){
+        Log.d("testi", KuittiVarastoFragment.kuitit.toString())
         val kuitteja = KuittiVarastoFragment.kuitit
         val num = kuitteja.size
         val kuitti = kuitteja[position%num]
@@ -74,6 +84,9 @@ class KuittiAdapteri: RecyclerView.Adapter<KuittiAdapteri.ViewHolder>(){
     }
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        init {
+            Log.d("testi", "viewholder")
+        }
         private val button: Button = itemView.findViewById(R.id.btKuitti)
         fun bind(item: Kuitti){
             button.setText(item.tuotenimi)

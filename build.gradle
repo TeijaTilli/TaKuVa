@@ -3,7 +3,7 @@ buildscript {
     repositories {
         google()
         mavenCentral()
-    }
+    }//
     //lisätään tietokantaa varten:
     ext{
         room_version='2.3.0' //oli 2.2.5

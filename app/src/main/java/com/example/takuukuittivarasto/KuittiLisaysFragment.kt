@@ -1,7 +1,6 @@
 package com.example.takuukuittivarasto
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -9,10 +8,13 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.KeyEvent
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -50,6 +52,10 @@ class KuittiLisaysFragment : Fragment() {
     private lateinit var database: TakuukuittiDB
     private lateinit var dao: TakuukuittiDBDao
     private lateinit var binding : FragmentKuittiLisaysBinding;
+    companion object { //tässä pysyy sitten tallessa kenttien tiedot, kun on staattisena
+        var txtNimiKentta : String = ""
+        var takuuPvm: Long = 0L
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,12 +76,37 @@ class KuittiLisaysFragment : Fragment() {
             checkCameraPermission()
             openCamera()
         }
+        binding.txtNimi.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
+            var kentta = v as EditText
+            txtNimiKentta = kentta.text.toString()
+            return@OnKeyListener false
+        })
+
         binding.btOpenGallery.setOnClickListener {
             openGallery()
         }
         binding.tallennaBtn.setOnClickListener {
             tallenna()
         }
+        binding.takaisin11Btn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_kuittiLisaysFragment_to_mainFragment)
+        }
+        binding.btKalenteriin.setOnClickListener {
+            it.findNavController().navigate(R.id.action_kuittiLisaysFragment_to_takuuPvmValitsinFragment)
+        }
+        Log.d("testi", arguments?.getLong("date").toString())
+
+        if(arguments?.getLong("date") == 0L) {
+            if(takuuPvm == 0L) {
+                takuuPvm = Date().time
+            }
+
+
+        } else {
+            takuuPvm = arguments?.getLong("date")!!
+        }
+        binding.txtValittuPvm.text = "Päivämäärä: ${Date(takuuPvm).toLocaleString()}"
+        binding.txtNimi.setText(txtNimiKentta)
         return binding.root
     }
 
@@ -89,6 +120,10 @@ class KuittiLisaysFragment : Fragment() {
             != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(arrayOf(Manifest.permission.CAMERA), REQUEST_PERMISSION)
         }
+    }
+    override fun onResume() {
+        super.onResume()
+        checkCameraPermission()
     }
     fun tallenna() {
         Log.d("testi", "tallenna() -kohdassa ollaan.")
