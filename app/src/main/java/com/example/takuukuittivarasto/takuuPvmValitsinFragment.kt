@@ -8,7 +8,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CalendarView
+import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.example.takuukuittivarasto.databinding.FragmentTakuuPvmValitsinBinding
 import kotlinx.android.synthetic.main.activity_takuu_pvm_valitsin.*
 import java.text.SimpleDateFormat
@@ -41,7 +43,10 @@ class takuuPvmValitsinFragment : Fragment() {
 
         })
         binding.btTallenna.setOnClickListener {
-
+            val bundle = bundleOf(
+                Pair("date", binding.pvmTakuu.date)
+            )
+            it.findNavController().navigate(R.id.action_takuuPvmValitsinFragment_to_kuittiLisaysFragment, bundle)
         }
         return binding.root
     }

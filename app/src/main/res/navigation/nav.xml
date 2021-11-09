@@ -32,6 +32,10 @@
         <action
             android:id="@+id/action_kuittiLisaysFragment_to_takuuPvmValitsinFragment"
             app:destination="@id/takuuPvmValitsinFragment" />
+        <argument
+            android:name="date"
+            app:argType="long"
+            android:defaultValue="0L" />
     </fragment>
     <fragment
         android:id="@+id/kuitinTarkasteluFragment"

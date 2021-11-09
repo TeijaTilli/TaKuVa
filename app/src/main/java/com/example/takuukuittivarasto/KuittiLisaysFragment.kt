@@ -1,6 +1,7 @@
 package com.example.takuukuittivarasto
 
 import android.Manifest
+import android.app.Activity.RESULT_OK
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -15,7 +16,9 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.drawable.toBitmap
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.findNavController
 import com.example.takuukuittivarasto.databinding.FragmentKuittiLisaysBinding;
 import kotlinx.android.synthetic.main.activity_kuitin_lisays_sivu.*
 import kotlinx.coroutines.Dispatchers
@@ -48,7 +51,6 @@ class KuittiLisaysFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_kuitti_lisays, container, false)
         binding.btCapturePhoto.setOnClickListener {
             checkCameraPermission()
-            openCamera()
         }
         binding.btOpenGallery.setOnClickListener {
             openGallery()
@@ -56,6 +58,10 @@ class KuittiLisaysFragment : Fragment() {
         binding.tallennaBtn.setOnClickListener {
             tallenna()
         }
+        binding.btKalenteriin.setOnClickListener {
+            it.findNavController().navigate(R.id.action_kuittiLisaysFragment_to_takuuPvmValitsinFragment)
+        }
+        Log.d("testi", arguments?.getLong("date").toString())
         return binding.root
     }
     private fun checkCameraPermission() {
@@ -63,6 +69,9 @@ class KuittiLisaysFragment : Fragment() {
             != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(arrayOf(Manifest.permission.CAMERA), REQUEST_PERMISSION)
         }
+    }
+    fun onRequestPermission(RequestCode : Int, permissions : Array<String>, grantResults : Array<Int>) {
+
     }
     fun tallenna() {
         Log.d("testi", "tallenna() -kohdassa ollaan.")
@@ -107,16 +116,16 @@ class KuittiLisaysFragment : Fragment() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (resultCode == AppCompatActivity.RESULT_OK) {
+        if (resultCode == RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 val bitmap = data?.extras?.get("data") as Bitmap
-                ivKuitti.setImageBitmap(bitmap)
-                IMAGE_BITMAP = ivKuitti.drawable.toBitmap()
+                binding.ivKuitti.setImageBitmap(bitmap)
+                IMAGE_BITMAP = binding.ivKuitti.drawable.toBitmap()
             }
             else if (requestCode == REQUEST_PICK_IMAGE) {
                 val uri = data?.getData()
-                ivKuitti.setImageURI(uri)
-                IMAGE_BITMAP = ivKuitti.drawable.toBitmap()
+                binding.ivKuitti.setImageURI(uri)
+                IMAGE_BITMAP = binding.ivKuitti.drawable.toBitmap()
             }
         }
     }
