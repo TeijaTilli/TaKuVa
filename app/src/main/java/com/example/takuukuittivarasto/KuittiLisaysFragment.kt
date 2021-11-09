@@ -38,6 +38,7 @@ class KuittiLisaysFragment : Fragment() {
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_PICK_IMAGE = 2
     private var IMAGE_BITMAP: Bitmap? = null;
+    private var takuuPvm: Long = 0L
     private lateinit var database: TakuukuittiDB
     private lateinit var dao: TakuukuittiDBDao
     private lateinit var binding : FragmentKuittiLisaysBinding;
@@ -51,6 +52,7 @@ class KuittiLisaysFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_kuitti_lisays, container, false)
         binding.btCapturePhoto.setOnClickListener {
             checkCameraPermission()
+            openCamera()
         }
         binding.btOpenGallery.setOnClickListener {
             openGallery()
@@ -58,10 +60,21 @@ class KuittiLisaysFragment : Fragment() {
         binding.tallennaBtn.setOnClickListener {
             tallenna()
         }
+        binding.takaisin11Btn.setOnClickListener {
+            it.findNavController().navigate(R.id.action_kuittiLisaysFragment_to_mainFragment)
+        }
         binding.btKalenteriin.setOnClickListener {
             it.findNavController().navigate(R.id.action_kuittiLisaysFragment_to_takuuPvmValitsinFragment)
         }
         Log.d("testi", arguments?.getLong("date").toString())
+
+        if(arguments?.getLong("date") == 0L) {
+            takuuPvm = Date().time
+
+        } else {
+            takuuPvm = arguments?.getLong("date")!!
+        }
+        binding.txtValittuPvm.text = "Päivämäärä: ${Date(takuuPvm).toLocaleString()}"
         return binding.root
     }
     private fun checkCameraPermission() {
@@ -70,20 +83,18 @@ class KuittiLisaysFragment : Fragment() {
             requestPermissions(arrayOf(Manifest.permission.CAMERA), REQUEST_PERMISSION)
         }
     }
-    fun onRequestPermission(RequestCode : Int, permissions : Array<String>, grantResults : Array<Int>) {
-
+    override fun onResume() {
+        super.onResume()
+        checkCameraPermission()
     }
     fun tallenna() {
         Log.d("testi", "tallenna() -kohdassa ollaan.")
         // kuva pitää tallentaa bytearrayna!
-        var kuitti = Takuukuitti(1, txtNimi.text.toString(), Date(), IMAGE_BITMAP)
-
-        Log.d("testi", "${kuitti.toString()}")
 
         if(txtNimi.text.toString() != ""){ //tallennetaan vain jos nimi määrätty, voi laittaa muitakin ehtoja
             //seuraava tapahtuu eri säikeessä:
             GlobalScope.launch(context = Dispatchers.Default) {
-                dao.lisaaUusiKuitti(txtNimi.text.toString(),123444555,"") //id tulee automaattisesti
+                dao.lisaaUusiKuitti(txtNimi.text.toString(),takuuPvm,"") //id tulee automaattisesti
                 var kuittilistaus=dao.haeKuitit()
                 kuittilistaus.forEach{
                     Log.d("testi", "Tietokannan sisältö: "+it.id.toString() + " " + it.tuotenimi + " " + it.takuupvm)
