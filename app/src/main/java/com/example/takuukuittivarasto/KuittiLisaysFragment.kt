@@ -1,6 +1,7 @@
 package com.example.takuukuittivarasto
 
 import android.Manifest
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -121,10 +122,7 @@ class KuittiLisaysFragment : Fragment() {
             requestPermissions(arrayOf(Manifest.permission.CAMERA), REQUEST_PERMISSION)
         }
     }
-    override fun onResume() {
-        super.onResume()
-        checkCameraPermission()
-    }
+
     fun tallenna() {
         Log.d("testi", "tallenna() -kohdassa ollaan.")
         //nimi:
