@@ -41,12 +41,12 @@ class KuittiLisaysFragment : Fragment() {
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_PICK_IMAGE = 2
     private var IMAGE_BITMAP: Bitmap? = null;
-    private var takuuPvm: Long = 0L
     private lateinit var database: TakuukuittiDB
     private lateinit var dao: TakuukuittiDBDao
     private lateinit var binding : FragmentKuittiLisaysBinding;
     companion object { //tässä pysyy sitten tallessa kenttien tiedot, kun on staattisena
         var txtNimiKentta : String = ""
+        var takuuPvm: Long = 0L
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -81,7 +81,10 @@ class KuittiLisaysFragment : Fragment() {
         Log.d("testi", arguments?.getLong("date").toString())
 
         if(arguments?.getLong("date") == 0L) {
-            takuuPvm = Date().time
+            if(takuuPvm == 0L) {
+                takuuPvm = Date().time
+            } 
+
 
         } else {
             takuuPvm = arguments?.getLong("date")!!

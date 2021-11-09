@@ -26,6 +26,9 @@ class takuuPvmValitsinFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_takuu_pvm_valitsin, container, false)
+        if(KuittiLisaysFragment.takuuPvm != 0L) {
+            binding.pvmTakuu.setDate(KuittiLisaysFragment.takuuPvm)
+        }
         binding.btVuosiTaaksepain.setOnClickListener {
             var pvm = binding.pvmTakuu.date-31557600000
             binding.pvmTakuu.date = pvm;
