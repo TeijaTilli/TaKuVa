@@ -10,17 +10,6 @@ import androidx.room.RoomDatabase //tietokanta
 import androidx.room.PrimaryKey
 import com.google.android.material.textfield.TextInputLayout
 
-data class Takuukuitti(val id: Int, val otsikko: String, val paattymispvm : Date, val kuva : Bitmap?) {
-    fun teeNappi(sivu: AppCompatActivity):Button {
-        val nappi = Button(sivu)
-        nappi.text="${this.otsikko} > ${this.paattymispvm}"
-        return nappi
-    }
-    //kun luodaan uusi Takuukuitti-olio, tallennetaan samalla sen tieto tietokantaan:
-    fun tallennaTietokantaan(){
-        //tämä pois jos ei tarvita
-    }
-}
 
 @Entity
 data class Kuitti(  //luodaan taulu

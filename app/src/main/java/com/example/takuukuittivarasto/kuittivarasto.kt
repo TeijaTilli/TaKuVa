@@ -17,7 +17,7 @@ class kuittivarasto : AppCompatActivity() {
     //private lateinit var database: Tietokanta
     //private lateinit var dao: TietokantaDao
     companion object{
-        lateinit var kuitit: MutableList<Takuukuitti>
+        //lateinit var kuitit: MutableList<Takuukuitti>
 
     }
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,8 +27,8 @@ class kuittivarasto : AppCompatActivity() {
         //database = Tietokanta.getInstance(applicationContext)
         //dao = database.TietokantaDao
         //kuittilista testaukseen
-        kuitit = listOf(Takuukuitti(1, "kuitti", Date(2022, 12, 2), null),
-                        Takuukuitti(2, "kuitti2", Date(2033, 11, 4), null)) as MutableList<Takuukuitti>
+        //kuitit = listOf(Takuukuitti(1, "kuitti", Date(2022, 12, 2), null),
+         //               Takuukuitti(2, "kuitti2", Date(2033, 11, 4), null)) as MutableList<Takuukuitti>
         kuittiRecyclerView.apply {
             layoutManager = LinearLayoutManager(this@kuittivarasto)
             adapter = KuittiAdapteri()

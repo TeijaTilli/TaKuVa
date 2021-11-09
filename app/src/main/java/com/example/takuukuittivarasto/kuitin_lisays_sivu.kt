@@ -60,8 +60,8 @@ class kuitin_lisays_sivu : AppCompatActivity() {
     fun tallenna() {
         Log.d("testi", "tallenna() -kohdassa ollaan.")
        // kuva pitää tallentaa bytearrayna!.. tai tallentaa tiedostoon...
-        var kuitti = Takuukuitti(1, txtNimi.text.toString(), Date(), IMAGE_BITMAP)
-        Log.d("testi", "${kuitti.toString()}")
+        //var kuitti = Takuukuitti(1, txtNimi.text.toString(), Date(), IMAGE_BITMAP)
+        //Log.d("testi", "${kuitti.toString()}")
 
         if(txtNimi.text.toString() != ""){ //tallennetaan vain jos nimi määrätty, voi laittaa muitakin ehtoja
             //seuraava tapahtuu eri säikeessä:
