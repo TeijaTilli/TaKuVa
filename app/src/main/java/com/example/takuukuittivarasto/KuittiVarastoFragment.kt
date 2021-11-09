@@ -37,6 +37,7 @@ class KuittiVarastoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("testi", "kuittivarastossa ollaan")
         //Tietokannan lisääminen
         tietokanta = TakuukuittiDB.getInstance(requireContext())
         dao = tietokanta.takuukuittiDBDao
@@ -55,6 +56,7 @@ class KuittiVarastoFragment : Fragment() {
             adapter = KuittiAdapteri()
             Log.d("testi", "<-recyclerview.apply")
         }
+        Log.d("testi", "binding.root seuraavaksi....")
         return binding.root
     }
 

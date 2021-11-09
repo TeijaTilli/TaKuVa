@@ -10,6 +10,7 @@ import androidx.room.RoomDatabase //tietokanta
 import androidx.room.PrimaryKey
 import com.google.android.material.textfield.TextInputLayout
 
+
 @Entity
 data class Kuitti(  //luodaan taulu
     @PrimaryKey val id: Int,
