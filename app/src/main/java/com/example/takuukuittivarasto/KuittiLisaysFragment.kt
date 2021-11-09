@@ -69,6 +69,9 @@ class KuittiLisaysFragment : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_kuitti_lisays, container, false)
 
         // Takaisin main-fragmenttiin:
+        ///data/user/0/com.example.takuukuittivarasto/files/1636463421617.jpg
+        //var bitmap = BitmapFactory.decodeFile("/data/user/0/com.example.takuukuittivarasto/files/1636463909453.jpg")
+        //binding.ivKuitti.setImageBitmap(bitmap)
         binding.takaisin11Btn.setOnClickListener {
             it.findNavController().navigate(R.id.action_kuittiLisaysFragment_to_mainFragment)
         }
@@ -101,8 +104,6 @@ class KuittiLisaysFragment : Fragment() {
             if(takuuPvm == 0L) {
                 takuuPvm = Date().time
             }
-
-
         } else {
             takuuPvm = arguments?.getLong("date")!!
         }
@@ -126,24 +127,24 @@ class KuittiLisaysFragment : Fragment() {
     fun tallenna() {
         Log.d("testi", "tallenna() -kohdassa ollaan.")
         //nimi:
-        var nimi = txtNimi.text.toString()
+        var nimi = binding.txtNimi.text.toString()
         //takuu-pvm, tähän kalenterista aika millisekunteina
-        var takuupvm :Long = 123456789
         val kuvanNimiMillisekunteina = Date().time
         //kuva:
         try{ //haetaan kuva jos sellainen on
-            IMAGE_BITMAP = (ivKuitti.getDrawable() as BitmapDrawable).bitmap //kuva kiinni, toimisiko?
+            IMAGE_BITMAP = (binding.ivKuitti.getDrawable() as BitmapDrawable).bitmap //kuva kiinni, toimisiko?
         }catch (e: Exception){
             d("testi","Imege Viewissä ei ole tallennettavaa kuvaa")
         }
 
-        if(nimi != "" && IMAGE_BITMAP != null && takuupvm != null){ //tallennetaan jos nimi, kuva ja aika määrätty
+        if(nimi != "" && IMAGE_BITMAP != null && takuuPvm != null){ //tallennetaan jos nimi, kuva ja aika määrätty
             //kuvan filepath:
             val file: File = requireContext().getFileStreamPath(kuvanNimiMillisekunteina.toString() + ".jpg")
             val imageFullPath: String = file.getAbsolutePath()
+            Log.d("testi", imageFullPath)
             //seuraava tapahtuu eri säikeessä:
             GlobalScope.launch(context = Dispatchers.Default) {
-                dao.lisaaUusiKuitti(nimi, takuupvm,imageFullPath) //id tulee automaattisesti
+                dao.lisaaUusiKuitti(nimi, takuuPvm, imageFullPath) //id tulee automaattisesti
                 var kuittilistaus=dao.haeKuitit()
                 kuittilistaus.forEach{
                     Log.d("testi", "Tietokannan sisältö: "+it.id.toString() + " " + it.tuotenimi + " " + it.takuupvm + " ms kuvaan:" + kuvanNimiMillisekunteina)

@@ -59,5 +59,6 @@ class KuitinTarkasteluFragment : Fragment() {
 
     fun poista() {
         dao.poistaKuitti(kuitinId)
+        
     }
 }
