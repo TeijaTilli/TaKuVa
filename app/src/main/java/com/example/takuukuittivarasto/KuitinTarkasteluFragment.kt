@@ -54,28 +54,20 @@ class KuitinTarkasteluFragment : Fragment() {
     }
 
     fun tiedotRiveille() {
-        Log.d("testi","tiedotRiveille()")
-        Log.d("testi", Date().time.toString())
-        GlobalScope.launch(context = Dispatchers.Default) {
+        GlobalScope.launch(context = Dispatchers.IO) {
             var kuittilista=dao.haeYksiKuitti(kuitinId)
             kuittilista.forEach{
                 kuitti = it
-                Log.d("testi", "Tietokannan sisältö: "+it.id.toString() + " " + it.tuotenimi + " " + it.takuupvm)
                 //asetetaan tekstit tekstiriveille tietokannasta
-                txtTuotteenNimi.setText(it.tuotenimi)
-                txtPaivamaara.setText(it.takuupvm.toString())
 
             }
+            withContext(Dispatchers.Main) {
+                binding.txtTuotteenNimi.setText(kuitti.tuotenimi)
+                binding.txtPaivamaara.setText(kuitti.takuupvm.toString())
+                var bitmap = BitmapFactory.decodeFile(kuitti.kuva)
+                binding.ivKuitti.setImageBitmap(bitmap)
+            }
         }
-
-        Log.d("testi", Date().time.toString())
-
-
-    }
-    fun paivitaKayttoliittyma(tmpKuitti: Kuitti) {
-        Log.d("asd", "asd")
-        binding.txtTuotteenNimi.setText(tmpKuitti.tuotenimi)
-        binding.txtPaivamaara.setText(tmpKuitti.takuupvm.toString())
     }
     fun poista() {
         val builder = AlertDialog.Builder(requireActivity())

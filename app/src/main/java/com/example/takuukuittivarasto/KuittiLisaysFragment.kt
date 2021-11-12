@@ -69,7 +69,8 @@ class KuittiLisaysFragment : Fragment() {
 
         // Takaisin main-fragmenttiin:
         ///data/user/0/com.example.takuukuittivarasto/files/1636463421617.jpg
-
+        //var bitmap = BitmapFactory.decodeFile("/data/user/0/com.example.takuukuittivarasto/files/1636463909453.jpg")
+        //binding.ivKuitti.setImageBitmap(bitmap)
         binding.takaisin11Btn.setOnClickListener {
             it.findNavController().navigate(R.id.action_kuittiLisaysFragment_to_mainFragment)
         }
