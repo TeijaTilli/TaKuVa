@@ -17,12 +17,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.takuukuittivarasto.databinding.FragmentKuittiVarastoBinding
 import kotlinx.android.synthetic.main.kuittirivi.*
+import kotlinx.coroutines.*
 import java.lang.Exception
 import java.util.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.currentCoroutineContext
-import kotlinx.coroutines.launch
 
 /**
  * A simple [Fragment] subclass.
@@ -45,17 +42,20 @@ class KuittiVarastoFragment : Fragment() {
         //Tietokannan lisääminen
         tietokanta = TakuukuittiDB.getInstance(requireContext())
         dao = tietokanta.takuukuittiDBDao
-
-        GlobalScope.launch(context = Dispatchers.Default) {
-            kuitit = dao.haeKuitit()
-        }
-
-        // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_kuitti_varasto, container, false)
         binding.kuittiRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = KuittiAdapteri()
         }
+        GlobalScope.launch(context = Dispatchers.IO) {
+            kuitit = dao.haeKuitit()
+            withContext(Dispatchers.Main) {
+                binding.kuittiRecyclerView.adapter?.notifyDataSetChanged()
+            }
+        }
+
+        // Inflate the layout for this fragment
+
 
         return binding.root
     }
