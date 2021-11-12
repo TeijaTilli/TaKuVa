@@ -26,7 +26,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.takuukuittivarasto.databinding.FragmentKuittiLisaysBinding;
 import kotlinx.android.synthetic.*
-import kotlinx.android.synthetic.main.activity_kuitin_lisays_sivu.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -132,7 +131,7 @@ class KuittiLisaysFragment : Fragment() {
         val kuvanNimiMillisekunteina = Date().time
         //kuva:
         try{ //haetaan kuva jos sellainen on
-            IMAGE_BITMAP = (binding.ivKuitti.getDrawable() as BitmapDrawable).bitmap //kuva kiinni, toimisiko?
+            IMAGE_BITMAP = (binding.ivKuitti.drawable as BitmapDrawable).bitmap //kuva kiinni, toimisiko?
         }catch (e: Exception){
             d("testi","Imege Viewissä ei ole tallennettavaa kuvaa")
         }
@@ -196,13 +195,13 @@ class KuittiLisaysFragment : Fragment() {
         if (resultCode == AppCompatActivity.RESULT_OK) {
             if (requestCode == REQUEST_IMAGE_CAPTURE) {
                 val bitmap = data?.extras?.get("data") as Bitmap
-                ivKuitti.setImageBitmap(bitmap)
-                IMAGE_BITMAP = ivKuitti.drawable.toBitmap()
+                binding.ivKuitti.setImageBitmap(bitmap)
+                IMAGE_BITMAP = binding.ivKuitti.drawable.toBitmap()
             }
             else if (requestCode == REQUEST_PICK_IMAGE) {
                 val uri = data?.getData()
-                ivKuitti.setImageURI(uri)
-                IMAGE_BITMAP = ivKuitti.drawable.toBitmap()
+                binding.ivKuitti.setImageURI(uri)
+                IMAGE_BITMAP = binding.ivKuitti.drawable.toBitmap()
             }
         }
     }
