@@ -16,9 +16,6 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.takuukuittivarasto.databinding.FragmentKuittiVarastoBinding
-import kotlinx.android.synthetic.main.activity_kuitin_lisays_sivu.*
-import kotlinx.android.synthetic.main.activity_kuittivarasto.*
-import kotlinx.android.synthetic.main.activity_takuu_pvm_valitsin.*
 import kotlinx.android.synthetic.main.kuittirivi.*
 import java.lang.Exception
 import java.util.*

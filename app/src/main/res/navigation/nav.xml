@@ -45,6 +45,10 @@
         <action
             android:id="@+id/action_kuitinTarkasteluFragment_to_kuittiVarastoFragment"
             app:destination="@id/kuittiVarastoFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
     <fragment
         android:id="@+id/kuittiVarastoFragment"
@@ -64,9 +68,6 @@
         <action
             android:id="@+id/action_kuittiVarastoFragment_to_kuittiLisaysFragment"
             app:destination="@id/kuittiLisaysFragment" />
-        <argument
-            android:name="id"
-            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/takuuPvmValitsinFragment"
