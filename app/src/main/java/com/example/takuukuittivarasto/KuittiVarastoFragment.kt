@@ -63,6 +63,10 @@ class KuittiVarastoFragment : Fragment() {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = KuittiAdapteri()
             Log.d("testi", "<-recyclerview.apply")
+
+            binding.btTakaisinVarastosta.setOnClickListener {
+                it.findNavController().navigate(R.id.action_kuittiVarastoFragment_to_mainFragment)
+            }
         }
         Log.d("testi", "binding.root seuraavaksi....")
 
@@ -106,5 +110,6 @@ class KuittiAdapteri: RecyclerView.Adapter<KuittiAdapteri.ViewHolder>(){
                 it.findNavController().navigate(R.id.action_kuittiVarastoFragment_to_kuitinTarkasteluFragment, bundle)
             }
         }
+
     }
 }
