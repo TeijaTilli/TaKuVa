@@ -46,6 +46,11 @@ class KuittiVarastoFragment : Fragment() {
         binding.kuittiRecyclerView.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = KuittiAdapteri()
+            Log.d("testi", "<-recyclerview.apply")
+
+            binding.btTakaisinVarastosta.setOnClickListener {
+                it.findNavController().navigate(R.id.action_kuittiVarastoFragment_to_mainFragment)
+            }
         }
         GlobalScope.launch(context = Dispatchers.IO) {
             kuitit = dao.haeKuitit()
