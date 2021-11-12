@@ -8,15 +8,17 @@
         <entry key="..\:/Users/Roosa Turunen/AndroidStudioProjects/TaKuVa/app/src/main/res/layout/activity_main.xml" value="0.264" />
         <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/activity_kuitin_lisays_sivu.xml" value="0.16485507246376813" />
-        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/activity_kuittivarasto.xml" value="0.1358695652173913" />
-        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/activity_takuu_pvm_valitsin.xml" value="0.264" />
-        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/fragment_kuitin_tarkastelu.xml" value="0.14855072463768115" />
         <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/fragment_kuitti_lisays.xml" value="0.16485507246376813" />
-        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/fragment_kuitti_varasto.xml" value="0.14855072463768115" />
         <entry key="..\:/Users/jonna/AndroidStudioProjects/TaKuVa/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
         <entry key="..\:/Users/jonna/AndroidStudioProjects/TaKuVa/app/src/main/res/layout/activity_kuitin_lisays_sivu.xml" value="0.11018518518518519" />
         <entry key="..\:/Users/jonna/AndroidStudioProjects/TaKuVa/app/src/main/res/layout/activity_kuittivarasto.xml" value="0.264" />
         <entry key="..\:/Users/jonna/AndroidStudioProjects/TaKuVa/app/src/main/res/layout/kuittirivi.xml" value="0.264" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_kuitti_lisays.xml" value="0.5536842105263158" />
+        <entry key="app/src/main/res/layout/fragment_kuitti_varasto.xml" value="0.22871376811594202" />
+        <entry key="app/src/main/res/layout/fragment_main.xml" value="0.22871376811594202" />
+        <entry key="app/src/main/res/layout/fragment_takuu_pvm_valitsin.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/kuittirivi.xml" value="0.22871376811594202" />
       </map>
     </option>
   </component>

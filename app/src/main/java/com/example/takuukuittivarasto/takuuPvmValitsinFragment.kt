@@ -12,7 +12,6 @@ import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import com.example.takuukuittivarasto.databinding.FragmentTakuuPvmValitsinBinding
-import kotlinx.android.synthetic.main.activity_takuu_pvm_valitsin.*
 import java.text.SimpleDateFormat
 import java.util.*
 
