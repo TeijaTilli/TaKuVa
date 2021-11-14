@@ -29,6 +29,7 @@ class KuitinTarkasteluFragment : Fragment() {
     private lateinit var dao: TakuukuittiDBDao
     private lateinit var kuitti : Kuitti
     var kuitinId = 1
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

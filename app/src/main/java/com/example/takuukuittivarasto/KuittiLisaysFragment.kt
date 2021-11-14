@@ -161,7 +161,7 @@ class KuittiLisaysFragment : Fragment() {
         //https://www.codexpedia.com/android/android-download-and-save-image-internally/
         // ohjeet myös kuvan noutamiseen, kohta 4 ->
         val foStream: FileOutputStream
-        try { // mikä formaatti kuvalle? .jpg? .jpeg? .png?
+        try {
             foStream = context.openFileOutput(imageName.toString() +".jpg", Context.MODE_PRIVATE)
             b.compress(Bitmap.CompressFormat.JPEG, 100, foStream)
             foStream.close()
