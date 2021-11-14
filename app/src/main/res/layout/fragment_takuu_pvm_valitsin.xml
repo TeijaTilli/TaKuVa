@@ -38,14 +38,20 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Vuosi (-)" />
+                    android:insetLeft="10dp"
+                    android:insetRight="5dp"
+                    android:text="Vuosi (-)"
+                    android:textSize="20sp" />
 
                 <Button
                     android:id="@+id/btVuosiEteenpain"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:insetLeft="5dp"
+                    android:insetRight="10dp"
                     android:text="Vuosi (+)"
+                    android:textSize="20sp"
                     app:layout_constraintStart_toStartOf="parent" />
             </LinearLayout>
 
@@ -54,7 +60,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
+                android:backgroundTint="@color/light_green"
+                android:insetLeft="10dp"
+                android:insetRight="10dp"
                 android:text="Tallenna"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

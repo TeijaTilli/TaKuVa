@@ -143,7 +143,7 @@ class KuittiLisaysFragment : Fragment() {
             Log.d("testi", imageFullPath)
             //seuraava tapahtuu eri säikeessä:
             GlobalScope.launch(context = Dispatchers.Default) {
-                dao.lisaaUusiKuitti(nimi, takuuPvm, imageFullPath) //id tulee automaattisesti
+                dao.lisaaUusiKuitti(nimi, takuuPvm, imageFullPath)
                 var kuittilistaus=dao.haeKuitit()
                 kuittilistaus.forEach{
                     Log.d("testi", "Tietokannan sisältö: "+it.id.toString() + " " + it.tuotenimi + " " + it.takuupvm + " ms kuvaan:" + kuvanNimiMillisekunteina)

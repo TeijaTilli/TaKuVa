@@ -14,7 +14,7 @@
         android:backgroundTint="@color/black"
         android:backgroundTintMode="add"
         android:text="Button"
-        android:textAlignment="textStart"
+        android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"

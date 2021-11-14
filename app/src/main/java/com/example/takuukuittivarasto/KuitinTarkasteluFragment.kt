@@ -1,10 +1,12 @@
 package com.example.takuukuittivarasto
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
+import android.util.Log.d
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -14,7 +16,12 @@ import androidx.navigation.findNavController
 import com.example.takuukuittivarasto.databinding.FragmentKuitinTarkasteluBinding;
 import kotlinx.android.synthetic.main.fragment_kuitin_tarkastelu.*
 import kotlinx.coroutines.*
+import java.io.File
 import java.util.Date
+//import androidx.test.core.app.ApplicationProvider.getApplicationContext
+
+
+
 
 
 /**
@@ -29,6 +36,7 @@ class KuitinTarkasteluFragment : Fragment() {
     private lateinit var dao: TakuukuittiDBDao
     private lateinit var kuitti : Kuitti
     var kuitinId = 1
+    var kuitinKuvanNimi = "" //otetaan kiinni kuvan tiedostosta poistoa varten
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,6 +75,7 @@ class KuitinTarkasteluFragment : Fragment() {
                 binding.txtPaivamaara.setText(kuitti.takuupvm.toString())
                 var bitmap = BitmapFactory.decodeFile(kuitti.kuva)
                 binding.ivKuitti.setImageBitmap(bitmap)
+                kuitinKuvanNimi = kuitti.kuva
             }
         }
     }
@@ -79,10 +88,21 @@ class KuitinTarkasteluFragment : Fragment() {
             })
             .setPositiveButton("Kyllä", DialogInterface.OnClickListener {
                     dialog, id ->
+                    d("testi", "Kuvaa aloitetaan poistamaan." + kuitinKuvanNimi)
+                var kuvanNimiMillisekunteina = kuitinKuvanNimi.substring(kuitinKuvanNimi.length-17)
+                   d("testi", "Kuvan nimi millisekunteina, 18 kirjainta " +kuvanNimiMillisekunteina)
+                    var file : File = requireContext().getFileStreamPath(kuvanNimiMillisekunteina)//kaatuu
+                    d("testi", "Tätä poistetaan: ." +kuvanNimiMillisekunteina) //"163 688 945 204 9.jpg"
                 GlobalScope.launch(context = Dispatchers.Default) {
                     dao.poistaKuitti(kuitinId)
-                    //tiedoston poisto tähän
+                    //kuvatiedoston poisto tähän:
+                    if (file.exists()) {
+                        d("testi", "Haettu kuvatiedosto on olemassa:" + kuitinKuvanNimi)
+                        file.delete()
+                        d("testi", "Kuva on nyt poistettu tiedostosta.")
+                    }
                 }
+                d("testi", "Palataan kuittivarastolistaukseen seuraavaksi.")
                 requireView().findNavController().navigate(R.id.action_kuitinTarkasteluFragment_to_kuittiVarastoFragment)
             })
 
