@@ -34,6 +34,7 @@ import java.lang.Exception
 import java.util.*
 import android.graphics.drawable.BitmapDrawable
 import android.util.Log.d
+import kotlinx.android.synthetic.main.fragment_kuitti_lisays.*
 import java.io.File
 
 
@@ -48,6 +49,7 @@ class KuittiLisaysFragment : Fragment() {
     private val REQUEST_PERMISSION = 100 //luvat kameran käyttöön ja kuvagallerian
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_PICK_IMAGE = 2
+    private var onkoKuvaJaTeksti: Boolean = false
 
     private lateinit var database: TakuukuittiDB
     private lateinit var dao: TakuukuittiDBDao
@@ -92,8 +94,14 @@ class KuittiLisaysFragment : Fragment() {
         binding.btOpenGallery.setOnClickListener {
             openGallery()
         }
-        binding.tallennaBtn.setOnClickListener {
+        binding.tallennaBtn.setOnClickListener {//tallennetaan kuitti, siirrytään kuittilistaukseen
             tallenna()
+            if(onkoKuvaJaTeksti == true){
+                it.findNavController().navigate(R.id.action_kuittiLisaysFragment_to_kuittiVarastoFragment)
+            }else{
+                d("testi", "boolean on false joten ei siirrytä rv-näkymään.")
+
+            }
         }
         binding.takaisin11Btn.setOnClickListener {
             it.findNavController().navigate(R.id.action_kuittiLisaysFragment_to_mainFragment)
@@ -131,6 +139,7 @@ class KuittiLisaysFragment : Fragment() {
         Log.d("testi", "tallenna() -kohdassa ollaan.")
         //nimi:
         var nimi = binding.txtNimi.text.toString()
+        binding.txtNimi.text.clear() //ei toimi!
         //takuu-pvm, tähän kalenterista aika millisekunteina
         val kuvanNimiMillisekunteina = Date().time
         //kuva:
@@ -141,7 +150,7 @@ class KuittiLisaysFragment : Fragment() {
         }
 
         if(nimi != "" && IMAGE_BITMAP != null && takuuPvm != null){ //tallennetaan jos nimi, kuva ja aika määrätty
-            //kuvan filepath:
+            onkoKuvaJaTeksti = true
             val file: File = requireContext().getFileStreamPath(kuvanNimiMillisekunteina.toString() + ".jpg")
             val imageFullPath: String = file.getAbsolutePath()
             Log.d("testi", imageFullPath)
@@ -153,11 +162,14 @@ class KuittiLisaysFragment : Fragment() {
                     Log.d("testi", "Tietokannan sisältö: "+it.id.toString() + " " + it.tuotenimi + " " + it.takuupvm + " ms kuvaan:" + kuvanNimiMillisekunteina)
                 }
             }
+
         }else{
             Toast.makeText(requireContext(), "Laita nimi ja aseta kuva!", Toast.LENGTH_LONG).show()
         }
-        if (IMAGE_BITMAP != null){//tallennetaan kuva tiedostoon
+        if (IMAGE_BITMAP != null && nimi != ""){//tallennetaan kuva tiedostoon
+            d("testi", "Tallennetaan kuva sisäiseen tiedostoon.")
             saveImage(requireContext(), IMAGE_BITMAP!!, kuvanNimiMillisekunteina)
+            ivKuitti.setImageResource(0) //ei toimi!
         }
     }
 

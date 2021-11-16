@@ -50,6 +50,9 @@ class takuuPvmValitsinFragment : Fragment() {
             )
             it.findNavController().navigate(R.id.action_takuuPvmValitsinFragment_to_kuittiLisaysFragment, bundle)
         }
+        binding.btTakaisinKalenteri.setOnClickListener {
+            it.findNavController().navigate(R.id.action_takuuPvmValitsinFragment_to_kuittiLisaysFragment)
+        }
         return binding.root
     }
 
