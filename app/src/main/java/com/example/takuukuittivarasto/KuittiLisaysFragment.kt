@@ -140,6 +140,7 @@ class KuittiLisaysFragment : Fragment() {
         //nimi:
         var nimi = binding.txtNimi.text.toString()
         binding.txtNimi.text.clear() //ei toimi!
+        txtNimiKentta = ""
         //takuu-pvm, tähän kalenterista aika millisekunteina
         val kuvanNimiMillisekunteina = Date().time
         //kuva:
@@ -169,6 +170,7 @@ class KuittiLisaysFragment : Fragment() {
         if (IMAGE_BITMAP != null && nimi != ""){//tallennetaan kuva tiedostoon
             d("testi", "Tallennetaan kuva sisäiseen tiedostoon.")
             saveImage(requireContext(), IMAGE_BITMAP!!, kuvanNimiMillisekunteina)
+            IMAGE_BITMAP = null
             ivKuitti.setImageResource(0) //ei toimi!
         }
     }
