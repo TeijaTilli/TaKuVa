@@ -25,7 +25,7 @@ interface TakuukuittiDBDao{
     @Query("INSERT INTO kuitti (tuotenimi, takuupvm, kuva) VALUES (:tuotenimi, :takuupvm, :kuva);")
     fun lisaaUusiKuitti(tuotenimi:String, takuupvm: Long, kuva: String)
 
-    @Query("SELECT * FROM kuitti ORDER BY takuupvm;")
+    @Query("SELECT * FROM kuitti ORDER BY takuupvm DESC, tuotenimi;")
     fun haeKuitit() : List<Kuitti>
 
     @Query("DELETE FROM kuitti WHERE id= :id2;")

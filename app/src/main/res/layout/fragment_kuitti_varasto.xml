@@ -15,6 +15,7 @@
             android:layout_width="wrap_content"
             android:layout_height="538dp"
             android:fillViewport="true"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -35,7 +36,7 @@
 
         <LinearLayout
             android:id="@+id/linearLayout3"
-            android:layout_width="450dp"
+            android:layout_width="0dp"
             android:layout_height="118dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -49,8 +50,8 @@
                 android:layout_gravity="bottom"
                 android:layout_marginBottom="0dp"
                 android:backgroundTint="@android:color/holo_green_light"
-                android:insetLeft="5dp"
-                android:insetRight="5dp"
+                android:insetLeft="10dp"
+                android:insetRight="10dp"
                 android:text="Takaisin"
                 android:textSize="20sp" />
 
