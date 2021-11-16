@@ -48,13 +48,15 @@ class KuittiLisaysFragment : Fragment() {
     private val REQUEST_PERMISSION = 100 //luvat kameran käyttöön ja kuvagallerian
     private val REQUEST_IMAGE_CAPTURE = 1
     private val REQUEST_PICK_IMAGE = 2
-    private var IMAGE_BITMAP: Bitmap? = null;
+
     private lateinit var database: TakuukuittiDB
     private lateinit var dao: TakuukuittiDBDao
     private lateinit var binding : FragmentKuittiLisaysBinding;
     companion object { //tässä pysyy sitten tallessa kenttien tiedot, kun on staattisena
         var txtNimiKentta : String = ""
+        var kuvaPolku : String = ""
         var takuuPvm: Long = 0L
+        var IMAGE_BITMAP: Bitmap? = null;
     }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -74,7 +76,9 @@ class KuittiLisaysFragment : Fragment() {
         binding.takaisin11Btn.setOnClickListener {
             it.findNavController().navigate(R.id.action_kuittiLisaysFragment_to_mainFragment)
         }
-
+        if(IMAGE_BITMAP != null) {
+            binding.ivKuitti.setImageBitmap(IMAGE_BITMAP)
+        }
         binding.btCapturePhoto.setOnClickListener {
             checkCameraPermission()
             openCamera()

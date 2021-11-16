@@ -13,13 +13,11 @@
         <action
             android:id="@+id/action_mainFragment_to_kuittiLisaysFragment"
             app:destination="@id/kuittiLisaysFragment"
-            app:enterAnim="@android:anim/fade_in"
-            app:exitAnim="@android:anim/fade_out" />
+            app:enterAnim="@android:anim/slide_in_left" />
         <action
             android:id="@+id/action_mainFragment_to_kuittiVarastoFragment"
             app:destination="@id/kuittiVarastoFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right" />
+            app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
     <fragment
         android:id="@+id/kuittiLisaysFragment"
@@ -28,10 +26,12 @@
         tools:layout="@layout/fragment_kuitti_lisays" >
         <action
             android:id="@+id/action_kuittiLisaysFragment_to_mainFragment"
-            app:destination="@id/mainFragment" />
+            app:destination="@id/mainFragment"
+            app:enterAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_kuittiLisaysFragment_to_takuuPvmValitsinFragment"
-            app:destination="@id/takuuPvmValitsinFragment" />
+            app:destination="@id/takuuPvmValitsinFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
         <argument
             android:name="date"
             app:argType="long"
@@ -44,7 +44,8 @@
         tools:layout="@layout/fragment_kuitin_tarkastelu" >
         <action
             android:id="@+id/action_kuitinTarkasteluFragment_to_kuittiVarastoFragment"
-            app:destination="@id/kuittiVarastoFragment" />
+            app:destination="@id/kuittiVarastoFragment"
+            app:enterAnim="@android:anim/slide_out_right" />
         <argument
             android:name="id"
             app:argType="integer"
@@ -58,16 +59,15 @@
         <action
             android:id="@+id/action_kuittiVarastoFragment_to_mainFragment"
             app:destination="@id/mainFragment"
-            app:enterAnim="@android:anim/slide_in_left"
-            app:exitAnim="@android:anim/slide_out_right"
-            app:popEnterAnim="@android:anim/slide_in_left"
-            app:popExitAnim="@android:anim/slide_out_right" />
+            app:enterAnim="@android:anim/slide_out_right" />
         <action
             android:id="@+id/action_kuittiVarastoFragment_to_kuitinTarkasteluFragment"
-            app:destination="@id/kuitinTarkasteluFragment" />
+            app:destination="@id/kuitinTarkasteluFragment"
+            app:enterAnim="@android:anim/slide_in_left" />
         <action
             android:id="@+id/action_kuittiVarastoFragment_to_kuittiLisaysFragment"
-            app:destination="@id/kuittiLisaysFragment" />
+            app:destination="@id/kuittiLisaysFragment"
+            app:enterAnim="@android:anim/slide_out_right" />
     </fragment>
     <fragment
         android:id="@+id/takuuPvmValitsinFragment"
@@ -76,6 +76,7 @@
         tools:layout="@layout/fragment_takuu_pvm_valitsin" >
         <action
             android:id="@+id/action_takuuPvmValitsinFragment_to_kuittiLisaysFragment"
-            app:destination="@id/kuittiLisaysFragment" />
+            app:destination="@id/kuittiLisaysFragment"
+            app:enterAnim="@android:anim/slide_out_right" />
     </fragment>
 </navigation>
