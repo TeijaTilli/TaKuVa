@@ -53,6 +53,9 @@
             android:name="id"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/action_kuitinTarkasteluFragment_to_kuittiLisaysFragment"
+            app:destination="@id/kuittiLisaysFragment" />
     </fragment>
     <fragment
         android:id="@+id/kuittiVarastoFragment"

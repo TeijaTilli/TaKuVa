@@ -17,6 +17,7 @@ import com.example.takuukuittivarasto.databinding.FragmentKuitinTarkasteluBindin
 import kotlinx.android.synthetic.main.fragment_kuitin_tarkastelu.*
 import kotlinx.coroutines.*
 import java.io.File
+import java.text.DateFormat
 import java.util.Date
 //import androidx.test.core.app.ApplicationProvider.getApplicationContext
 
@@ -72,7 +73,7 @@ class KuitinTarkasteluFragment : Fragment() {
             }
             withContext(Dispatchers.Main) {
                 binding.txtTuotteenNimi.setText(kuitti.tuotenimi)
-                binding.txtPaivamaara.setText(kuitti.takuupvm.toString())
+                binding.txtPaivamaara.setText(DateFormat.getDateInstance().format(Date(kuitti.takuupvm)))
                 var bitmap = BitmapFactory.decodeFile(kuitti.kuva)
                 binding.ivKuitti.setImageBitmap(bitmap)
                 kuitinKuvanNimi = kuitti.kuva
