@@ -82,7 +82,6 @@ class KuittiLisaysFragment : Fragment() {
             binding.ivKuitti.setImageBitmap(IMAGE_BITMAP)
         }
         binding.btCapturePhoto.setOnClickListener {
-            checkCameraPermission()
             openCamera()
         }
         binding.txtNimi.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
