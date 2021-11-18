@@ -7,12 +7,11 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.util.Log.d
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.takuukuittivarasto.databinding.FragmentKuitinTarkasteluBinding;
 import kotlinx.android.synthetic.main.fragment_kuitin_tarkastelu.*
 import kotlinx.coroutines.*
@@ -31,6 +30,7 @@ import java.util.Date
  * create an instance of this fragment.
  */
 class KuitinTarkasteluFragment : Fragment() {
+    private lateinit var menuValikko: MenuValikko
     private lateinit var binding : FragmentKuitinTarkasteluBinding
     // TODO: Rename and change types of parameters
     private lateinit var database: TakuukuittiDB
@@ -60,7 +60,18 @@ class KuitinTarkasteluFragment : Fragment() {
             poista()
         }
 
+        menuValikko = MenuValikko(inflater = requireActivity().menuInflater,navController = findNavController(),R.id.action_kuitinTarkasteluFragment_to_kuittiLisaysFragment,fragment = this,activity = null)
+        setHasOptionsMenu(true);
+
         return binding.root
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menuValikko.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return menuValikko.onOptionsItemSelected(item)
     }
 
     fun tiedotRiveille() {

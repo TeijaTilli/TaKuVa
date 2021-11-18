@@ -4,16 +4,15 @@ import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.takuukuittivarasto.databinding.FragmentKuittiVarastoBinding
@@ -32,6 +31,7 @@ class KuittiVarastoFragment : Fragment() {
     private lateinit var binding : FragmentKuittiVarastoBinding
     private lateinit var tietokanta: TakuukuittiDB
     private lateinit var dao: TakuukuittiDBDao
+    private lateinit var menuValikko: MenuValikko
     companion object {
         var kuitit: List<Kuitti> = mutableListOf<Kuitti>()
 
@@ -61,12 +61,20 @@ class KuittiVarastoFragment : Fragment() {
             }
         }
 
-        // Inflate the layout for this fragment
+        menuValikko = MenuValikko(inflater = requireActivity().menuInflater,navController = findNavController(),R.id.action_kuittiVarastoFragment_to_kuittiLisaysFragment,fragment = this,activity = null)
+        setHasOptionsMenu(true);
 
 
         return binding.root
     }
 
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menuValikko.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return menuValikko.onOptionsItemSelected(item)
+    }
 }
 class KuittiAdapteri: RecyclerView.Adapter<KuittiAdapteri.ViewHolder>(){
 
