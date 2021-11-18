@@ -82,7 +82,6 @@ class KuittiLisaysFragment : Fragment() {
             binding.ivKuitti.setImageBitmap(IMAGE_BITMAP)
         }
         binding.btCapturePhoto.setOnClickListener {
-            checkCameraPermission()
             openCamera()
         }
         binding.txtNimi.setOnKeyListener(View.OnKeyListener { v, keyCode, event ->
@@ -139,7 +138,7 @@ class KuittiLisaysFragment : Fragment() {
         Log.d("testi", "tallenna() -kohdassa ollaan.")
         //nimi:
         var nimi = binding.txtNimi.text.toString()
-        binding.txtNimi.text.clear() //ei toimi!
+        //binding.txtNimi.text.clear() //ei toimi!
         txtNimiKentta = ""
         //takuu-pvm, tähän kalenterista aika millisekunteina
         val kuvanNimiMillisekunteina = Date().time
@@ -171,7 +170,7 @@ class KuittiLisaysFragment : Fragment() {
             d("testi", "Tallennetaan kuva sisäiseen tiedostoon.")
             saveImage(requireContext(), IMAGE_BITMAP!!, kuvanNimiMillisekunteina)
             IMAGE_BITMAP = null
-            ivKuitti.setImageResource(0) //ei toimi!
+            //ivKuitti.setImageResource(0) //ei toimi!
         }
     }
 
