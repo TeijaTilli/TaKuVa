@@ -1,6 +1,7 @@
 package com.example.takuukuittivarasto
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -19,6 +20,7 @@ import com.example.takuukuittivarasto.databinding.FragmentKuittiVarastoBinding
 import kotlinx.android.synthetic.main.kuittirivi.*
 import kotlinx.coroutines.*
 import java.lang.Exception
+import java.text.DateFormat
 import java.util.*
 
 /**
@@ -89,12 +91,15 @@ class KuittiAdapteri: RecyclerView.Adapter<KuittiAdapteri.ViewHolder>(){
 
         private val button: Button = itemView.findViewById(R.id.btKuitti)
         fun bind(item: Kuitti){
-            button.setText(item.tuotenimi + " " + item.takuupvm)
+            button.setText(item.tuotenimi + " " + DateFormat.getDateInstance().format(Date(item.takuupvm)))
             button.setOnClickListener {
                 val bundle = bundleOf(
                     Pair("id", item.id)
                 )
                 it.findNavController().navigate(R.id.action_kuittiVarastoFragment_to_kuitinTarkasteluFragment, bundle)
+            }
+            if (item.takuupvm < Calendar.getInstance().timeInMillis){
+                button.setBackgroundColor(Color.parseColor("#cacfd2"))
             }
         }
     }
