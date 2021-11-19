@@ -102,10 +102,9 @@ class KuittiAdapteri: RecyclerView.Adapter<KuittiAdapteri.ViewHolder>(){
         fun bind(item: Kuitti){
 
             if (item.takuupvm < Calendar.getInstance().timeInMillis) {
-                Log.d("testi", "${item.id} ${item.tuotenimi}")
-                Log.d("testi", (Date().time-86400000).toString())
-                Log.d("testi", item.takuupvm.toString())
                 button.setBackgroundColor(Color.GRAY)
+            } else {
+                button.setBackgroundColor(Color.parseColor("#01ad7c"))
             }
             button.setText(item.tuotenimi + " " + DateFormat.getDateInstance().format(Date(item.takuupvm)))
             button.setOnClickListener {
