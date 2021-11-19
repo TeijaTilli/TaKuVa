@@ -1,15 +1,20 @@
 package com.example.takuukuittivarasto
 
+import android.content.Context
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.databinding.*;
+import androidx.databinding.DataBindingUtil.setContentView
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
+import com.example.takuukuittivarasto.databinding.FragmentKuitinTarkasteluBinding.inflate
 import com.example.takuukuittivarasto.databinding.FragmentMainBinding
+import java.util.zip.Inflater
 
 class MainFragment : Fragment() {
+    private lateinit var menuValikko: MenuValikko
     private lateinit var binding : FragmentMainBinding;
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -23,6 +28,18 @@ class MainFragment : Fragment() {
         binding.katsoKuittejaBtn.setOnClickListener {
             it.findNavController().navigate(R.id.action_mainFragment_to_kuittiVarastoFragment)
         }
+
+        menuValikko = MenuValikko(inflater = requireActivity().menuInflater,navController = findNavController(),R.id.action_mainFragment_to_kuittiLisaysFragment,fragment = this,activity = null)
+        setHasOptionsMenu(true);
         return binding.root
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menuValikko.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return menuValikko.onOptionsItemSelected(item)
+    }
+
 }
