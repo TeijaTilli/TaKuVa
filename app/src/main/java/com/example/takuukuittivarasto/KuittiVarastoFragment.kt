@@ -106,8 +106,8 @@ class KuittiAdapteri: RecyclerView.Adapter<KuittiAdapteri.ViewHolder>(){
                 )
                 it.findNavController().navigate(R.id.action_kuittiVarastoFragment_to_kuitinTarkasteluFragment, bundle)
             }
-            if (item.takuupvm < Calendar.getInstance().timeInMillis){
-                button.setBackgroundColor(Color.parseColor("#cacfd2"))
+           if (item.takuupvm < Calendar.getInstance().timeInMillis){
+                button.setBackgroundColor(Color.parseColor("teal_700"))
             }
         }
     }
