@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
 import android.widget.Button
+import androidx.core.app.ActivityCompat.getColor
 import androidx.core.app.ActivityCompat.startActivityForResult
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.os.bundleOf
@@ -99,6 +100,12 @@ class KuittiAdapteri: RecyclerView.Adapter<KuittiAdapteri.ViewHolder>(){
 
         private val button: Button = itemView.findViewById(R.id.btKuitti)
         fun bind(item: Kuitti){
+
+            if (item.takuupvm < Calendar.getInstance().timeInMillis) {
+                button.setBackgroundColor(Color.GRAY)
+            } else {
+                button.setBackgroundColor(Color.parseColor("#01ad7c"))
+            }
             button.setText(item.tuotenimi + " " + DateFormat.getDateInstance().format(Date(item.takuupvm)))
             button.setOnClickListener {
                 val bundle = bundleOf(
@@ -106,9 +113,7 @@ class KuittiAdapteri: RecyclerView.Adapter<KuittiAdapteri.ViewHolder>(){
                 )
                 it.findNavController().navigate(R.id.action_kuittiVarastoFragment_to_kuitinTarkasteluFragment, bundle)
             }
-           if (item.takuupvm < Calendar.getInstance().timeInMillis){
-                button.setBackgroundColor(Color.parseColor("teal_700"))
-            }
+
         }
     }
 }

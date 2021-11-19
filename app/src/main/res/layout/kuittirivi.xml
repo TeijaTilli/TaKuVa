@@ -8,21 +8,11 @@
 
     <Button
         android:id="@+id/btKuitti"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="398dp"
-        android:layout_height="72dp"
-        android:backgroundTint="@color/black"
-        android:backgroundTintMode="add"
-        android:insetLeft="10dp"
-        android:insetTop="10dp"
-        android:insetRight="10dp"
+        android:layout_width="377dp"
+        android:layout_height="62dp"
+        android:backgroundTint="@color/light_green"
         android:text="Button"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        tools:layout_editor_absoluteX="11dp"
+        tools:layout_editor_absoluteY="10dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
