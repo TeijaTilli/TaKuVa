@@ -2,6 +2,7 @@ package com.example.takuukuittivarasto
 
 import android.app.Activity
 import android.content.Context
+import android.content.res.Resources
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -24,11 +25,7 @@ class MenuValikko(var inflater: MenuInflater, var navController: NavController, 
             navController.navigate(lisaaKuittiToiminto)
             return true
         }
-        if (id == R.id.action_two) {
-
-            return true
-        }
-        if (id == R.id.action_three) {
+        if (id == R.id.btnBarTeema) {
 
             return true
         }
