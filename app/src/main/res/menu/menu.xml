@@ -17,14 +17,11 @@
 
     <item
 
-        android:id="@+id/action_two"
+        android:id="@+id/btnBarTeema"
 
-        android:title="Item Two"/>
+        android:icon="@drawable/ic_action_teemaKuva"
 
-    <item
+        android:title="Vaihda teema"
 
-        android:id="@+id/action_three"
-
-        android:title="Item Three"/>
-
+        app:showAsAction="always" />
 </menu>
