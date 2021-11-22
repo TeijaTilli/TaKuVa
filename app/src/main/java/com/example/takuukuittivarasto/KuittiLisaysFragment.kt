@@ -117,7 +117,10 @@ class KuittiLisaysFragment : Fragment() {
         } else {
             takuuPvm = arguments?.getLong("date")!!
         }
-        binding.txtValittuPvm.text = "Päivämäärä: ${Date(takuuPvm).toLocaleString()}"
+        //var kuvanNimiMillisekunteina = kuitinKuvanNimi.substring(kuitinKuvanNimi.length-17)
+        var pvm = Date(takuuPvm).toLocaleString()
+        binding.txtValittuPvm.text = "Pvm: ${pvm.substring(0,9)}"
+        //binding.txtValittuPvm.text = "Pvm: ${Date(takuuPvm).toLocaleString()}"
         binding.txtNimi.setText(txtNimiKentta)
         return binding.root
     }

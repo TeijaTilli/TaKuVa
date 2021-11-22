@@ -39,7 +39,8 @@
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:text="Tuotteen nimi"
-                    tools:inputType="none" />
+                    tools:inputType="none"
+                    android:textColor = "?android:textColorPrimary"/>
 
                 <EditText
                     android:id="@+id/txtPaivamaara"
@@ -49,7 +50,8 @@
                     android:ems="10"
                     android:inputType="date"
                     android:text="Takuun viimeinen päivämäärä"
-                    tools:inputType="none" />
+                    tools:inputType="none"
+                    android:textColor = "?android:textColorPrimary"/>
 
             </LinearLayout>
 
