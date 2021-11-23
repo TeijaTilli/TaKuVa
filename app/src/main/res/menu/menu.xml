@@ -19,7 +19,7 @@
 
         android:id="@+id/btnBarTeema"
 
-        android:icon="@drawable/ic_action_teemaKuva"
+        android:icon="@drawable/ic_action_teemakuva"
 
         android:title="Vaihda teema"
 

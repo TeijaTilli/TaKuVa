@@ -27,7 +27,8 @@
                 <ImageView
                     android:id="@+id/ivKuitti"
                     android:layout_width="match_parent"
-                    android:layout_height="435dp"
+                    android:layout_height="300dp"
+                    android:scaleType="fitCenter"
                     android:src="#dedede" />
 
 

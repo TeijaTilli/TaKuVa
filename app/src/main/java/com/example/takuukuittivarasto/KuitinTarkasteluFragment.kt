@@ -8,6 +8,8 @@ import android.os.Bundle
 import android.util.Log
 import android.util.Log.d
 import android.view.*
+import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -36,6 +38,7 @@ class KuitinTarkasteluFragment : Fragment() {
     private lateinit var database: TakuukuittiDB
     private lateinit var dao: TakuukuittiDBDao
     private lateinit var kuitti : Kuitti
+    private var kuvaIsona : Boolean = false
     var kuitinId = 1
     var kuitinKuvanNimi = "" //otetaan kiinni kuvan tiedostosta poistoa varten
 
@@ -58,6 +61,20 @@ class KuitinTarkasteluFragment : Fragment() {
 
         binding.poistaBtn.setOnClickListener {
             poista()
+        }
+        binding.ivKuitti.setOnClickListener {
+            var iv = it as ImageView
+            Log.d("testi", kuvaIsona.toString())
+            if(kuvaIsona) {
+                kuvaIsona = false
+                iv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+                iv.adjustViewBounds = true
+                iv.scaleType = ImageView.ScaleType.FIT_CENTER
+            } else {
+                kuvaIsona = true
+                iv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+                iv.scaleType = ImageView.ScaleType.FIT_XY
+            }
         }
 
         menuValikko = MenuValikko(inflater = requireActivity().menuInflater,navController = findNavController(),R.id.action_kuitinTarkasteluFragment_to_kuittiLisaysFragment,fragment = this,activity = null)
