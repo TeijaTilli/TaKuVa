@@ -3,21 +3,16 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Roosa Turunen/AndroidStudioProjects/TaKuVa/app/src/main/res/layout/activity_kuitin_lisays_sivu.xml" value="0.264" />
-        <entry key="..\:/Users/Roosa Turunen/AndroidStudioProjects/TaKuVa/app/src/main/res/layout/activity_kuitin_tarkastelu.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/Roosa Turunen/AndroidStudioProjects/TaKuVa/app/src/main/res/layout/activity_main.xml" value="0.264" />
+        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
-        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/activity_kuitin_lisays_sivu.xml" value="0.16485507246376813" />
-        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/activity_kuittivarasto.xml" value="0.1358695652173913" />
-        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/activity_takuu_pvm_valitsin.xml" value="0.264" />
-        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/fragment_kuitin_tarkastelu.xml" value="0.14855072463768115" />
-        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/fragment_kuitti_lisays.xml" value="0.2" />
-        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/fragment_kuitti_varasto.xml" value="0.14855072463768115" />
-        <entry key="..\:/Users/jonna/AndroidStudioProjects/TaKuVa/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2703125" />
-        <entry key="..\:/Users/jonna/AndroidStudioProjects/TaKuVa/app/src/main/res/layout/activity_kuitin_lisays_sivu.xml" value="0.11018518518518519" />
-        <entry key="..\:/Users/jonna/AndroidStudioProjects/TaKuVa/app/src/main/res/layout/activity_kuittivarasto.xml" value="0.264" />
-        <entry key="..\:/Users/jonna/AndroidStudioProjects/TaKuVa/app/src/main/res/layout/fragment_kuitin_tarkastelu.xml" value="0.176" />
-        <entry key="..\:/Users/jonna/AndroidStudioProjects/TaKuVa/app/src/main/res/layout/kuittirivi.xml" value="0.264" />
+        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/activity_main.xml" value="0.11458333333333333" />
+        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/fragment_kuitin_tarkastelu.xml" value="0.10696266397578204" />
+        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/fragment_kuitti_lisays.xml" value="0.264" />
+        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/fragment_kuitti_varasto.xml" value="0.2" />
+        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/fragment_main.xml" value="0.10696266397578204" />
+        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/fragment_nav_host.xml" value="0.10696266397578204" />
+        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/fragment_takuu_pvm_valitsin.xml" value="0.264" />
+        <entry key="..\:/Users/Teija/AndroidStudioProjects/Takuukuittivarasto/app/src/main/res/layout/kuittirivi.xml" value="0.25" />
       </map>
     </option>
   </component>

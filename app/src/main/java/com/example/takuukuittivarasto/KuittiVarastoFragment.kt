@@ -101,7 +101,7 @@ class KuittiAdapteri: RecyclerView.Adapter<KuittiAdapteri.ViewHolder>(){
         private val button: Button = itemView.findViewById(R.id.btKuitti)
         fun bind(item: Kuitti){
 
-            if (item.takuupvm < Calendar.getInstance().timeInMillis) {
+            if (item.takuupvm < Calendar.getInstance().timeInMillis -86400000) {
                 button.setBackgroundColor(Color.GRAY)
             } else {
                 button.setBackgroundColor(Color.parseColor("#01ad7c"))

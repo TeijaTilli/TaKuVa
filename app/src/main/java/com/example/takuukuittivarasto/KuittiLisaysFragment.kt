@@ -115,7 +115,10 @@ class KuittiLisaysFragment : Fragment() {
         } else {
             takuuPvm = arguments?.getLong("date")!!
         }
-        binding.txtValittuPvm.text = "Päivämäärä: ${Date(takuuPvm).toLocaleString()}"
+        //var kuvanNimiMillisekunteina = kuitinKuvanNimi.substring(kuitinKuvanNimi.length-17)
+        var pvm = Date(takuuPvm).toLocaleString()
+        binding.txtValittuPvm.text = "Pvm: ${pvm.substring(0,9)}"
+        //binding.txtValittuPvm.text = "Pvm: ${Date(takuuPvm).toLocaleString()}"
         binding.txtNimi.setText(txtNimiKentta)
         return binding.root
     }
@@ -136,7 +139,7 @@ class KuittiLisaysFragment : Fragment() {
         Log.d("testi", "tallenna() -kohdassa ollaan.")
         //nimi:
         var nimi = binding.txtNimi.text.toString()
-        binding.txtNimi.text.clear() //ei toimi!
+        //binding.txtNimi.text.clear() //ei toimi!
         txtNimiKentta = ""
         //takuu-pvm, tähän kalenterista aika millisekunteina
         val kuvanNimiMillisekunteina = Date().time
@@ -168,7 +171,7 @@ class KuittiLisaysFragment : Fragment() {
             d("testi", "Tallennetaan kuva sisäiseen tiedostoon.")
             saveImage(requireContext(), IMAGE_BITMAP!!, kuvanNimiMillisekunteina)
             IMAGE_BITMAP = null
-            ivKuitti.setImageResource(0) //ei toimi!
+            //ivKuitti.setImageResource(0) //ei toimi!
         }
     }
 
