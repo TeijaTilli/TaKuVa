@@ -7,9 +7,11 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.util.Log
 import android.util.Log.d
+import android.util.TypedValue
 import android.view.*
 import android.widget.ImageView
 import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
@@ -56,6 +58,7 @@ class KuitinTarkasteluFragment : Fragment() {
         }
 
         binding.btnTakaisin.setOnClickListener {
+            (activity as AppCompatActivity?)!!.supportActionBar!!.show()
             it.findNavController().navigate(R.id.action_kuitinTarkasteluFragment_to_kuittiVarastoFragment)
         }
 
@@ -67,13 +70,18 @@ class KuitinTarkasteluFragment : Fragment() {
             Log.d("testi", kuvaIsona.toString())
             if(kuvaIsona) {
                 kuvaIsona = false
-                iv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
+                var pixeltodp = (400*resources.displayMetrics.density).toInt()
+                iv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, pixeltodp)
                 iv.adjustViewBounds = true
                 iv.scaleType = ImageView.ScaleType.FIT_CENTER
+                (activity as AppCompatActivity?)!!.supportActionBar!!.show()
             } else {
                 kuvaIsona = true
-                iv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT)
-                iv.scaleType = ImageView.ScaleType.FIT_XY
+                iv.adjustViewBounds = true
+                var pixeltodp = (1000*resources.displayMetrics.density).toInt()
+                iv.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, pixeltodp)
+                iv.scaleType = ImageView.ScaleType.FIT_CENTER
+                (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
             }
         }
 
@@ -132,6 +140,7 @@ class KuitinTarkasteluFragment : Fragment() {
                     }
                 }
                 d("testi", "Palataan kuittivarastolistaukseen seuraavaksi.")
+                (activity as AppCompatActivity?)!!.supportActionBar!!.show()
                 requireView().findNavController().navigate(R.id.action_kuitinTarkasteluFragment_to_kuittiVarastoFragment)
             })
 

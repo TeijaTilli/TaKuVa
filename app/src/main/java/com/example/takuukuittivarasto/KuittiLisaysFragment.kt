@@ -36,6 +36,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.util.Log.d
 import kotlinx.android.synthetic.main.fragment_kuitti_lisays.*
 import java.io.File
+import java.text.DateFormat
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -116,8 +117,7 @@ class KuittiLisaysFragment : Fragment() {
             takuuPvm = arguments?.getLong("date")!!
         }
         //var kuvanNimiMillisekunteina = kuitinKuvanNimi.substring(kuitinKuvanNimi.length-17)
-        var pvm = Date(takuuPvm).toLocaleString()
-        binding.txtValittuPvm.text = "Pvm: ${pvm.substring(0,9)}"
+        binding.txtValittuPvm.text = "Pvm: ${DateFormat.getDateInstance().format(Date(takuuPvm))}"
         //binding.txtValittuPvm.text = "Pvm: ${Date(takuuPvm).toLocaleString()}"
         binding.txtNimi.setText(txtNimiKentta)
         return binding.root
