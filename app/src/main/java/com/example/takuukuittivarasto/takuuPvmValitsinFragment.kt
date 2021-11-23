@@ -3,14 +3,13 @@ package com.example.takuukuittivarasto
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.CalendarView
 import androidx.core.os.bundleOf
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.findNavController
 import com.example.takuukuittivarasto.databinding.FragmentTakuuPvmValitsinBinding
 import java.text.SimpleDateFormat
 import java.util.*
@@ -18,7 +17,7 @@ import java.util.*
 
 class takuuPvmValitsinFragment : Fragment() {
     private lateinit var binding: FragmentTakuuPvmValitsinBinding
-
+    private lateinit var menuValikko : MenuValikko
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,6 +43,8 @@ class takuuPvmValitsinFragment : Fragment() {
             binding.pvmTakuu.setDate(uusi_date.time) // laitetaan kalenterin ajaksi tämä, muuten ei päivitä aikaa jostain syystä :)
 
         })
+        menuValikko = MenuValikko(inflater = requireActivity().menuInflater,navController = findNavController(),0,fragment = this,activity = null)
+        setHasOptionsMenu(true);
         binding.btTallenna.setOnClickListener {
             val bundle = bundleOf(
                 Pair("date", binding.pvmTakuu.date)
@@ -54,6 +55,13 @@ class takuuPvmValitsinFragment : Fragment() {
             it.findNavController().navigate(R.id.action_takuuPvmValitsinFragment_to_kuittiLisaysFragment)
         }
         return binding.root
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menuValikko.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return menuValikko.onOptionsItemSelected(item)
     }
 
 }

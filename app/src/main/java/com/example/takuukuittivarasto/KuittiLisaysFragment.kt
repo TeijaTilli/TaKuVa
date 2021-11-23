@@ -9,11 +9,7 @@ import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
-import android.view.KeyEvent
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -34,6 +30,8 @@ import java.lang.Exception
 import java.util.*
 import android.graphics.drawable.BitmapDrawable
 import android.util.Log.d
+import android.view.*
+import androidx.navigation.fragment.findNavController
 import kotlinx.android.synthetic.main.fragment_kuitti_lisays.*
 import java.io.File
 import java.text.DateFormat
@@ -55,6 +53,7 @@ class KuittiLisaysFragment : Fragment() {
     private lateinit var database: TakuukuittiDB
     private lateinit var dao: TakuukuittiDBDao
     private lateinit var binding : FragmentKuittiLisaysBinding;
+    private lateinit var menuValikko: MenuValikko
     companion object { //tässä pysyy sitten tallessa kenttien tiedot, kun on staattisena
         var txtNimiKentta : String = ""
         var takuuPvm: Long = 0L
@@ -116,13 +115,21 @@ class KuittiLisaysFragment : Fragment() {
         } else {
             takuuPvm = arguments?.getLong("date")!!
         }
+        menuValikko = MenuValikko(inflater = requireActivity().menuInflater,navController = findNavController(),0,fragment = this,activity = null)
+        setHasOptionsMenu(true);
         //var kuvanNimiMillisekunteina = kuitinKuvanNimi.substring(kuitinKuvanNimi.length-17)
         binding.txtValittuPvm.text = "Pvm: ${DateFormat.getDateInstance().format(Date(takuuPvm))}"
         //binding.txtValittuPvm.text = "Pvm: ${Date(takuuPvm).toLocaleString()}"
         binding.txtNimi.setText(txtNimiKentta)
         return binding.root
     }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menuValikko.onCreateOptionsMenu(menu)
+    }
 
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return menuValikko.onOptionsItemSelected(item)
+    }
     //seuraavat funktiot kuvien ottoa varten:
     override fun onResume() {
         super.onResume()

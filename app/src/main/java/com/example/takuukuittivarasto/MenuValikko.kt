@@ -6,6 +6,7 @@ import android.content.res.Resources
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
@@ -16,6 +17,15 @@ class MenuValikko(var inflater: MenuInflater, var navController: NavController, 
 
     fun onCreateOptionsMenu(menu: Menu): Boolean {
         inflater!!.inflate(R.menu.menu, menu)
+        if(lisaaKuittiToiminto == 0) {
+            if (fragment == null) {
+
+            } else {
+                var lisaanappi =
+                    menu.findItem(R.id.btnBarLisaaKuitti) as MenuItem
+                lisaanappi.isVisible = false
+            }
+        }
         return true
     }
 
