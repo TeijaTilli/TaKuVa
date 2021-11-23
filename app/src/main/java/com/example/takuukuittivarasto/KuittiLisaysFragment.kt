@@ -56,7 +56,6 @@ class KuittiLisaysFragment : Fragment() {
     private lateinit var binding : FragmentKuittiLisaysBinding;
     companion object { //tässä pysyy sitten tallessa kenttien tiedot, kun on staattisena
         var txtNimiKentta : String = ""
-        var kuvaPolku : String = ""
         var takuuPvm: Long = 0L
         var IMAGE_BITMAP: Bitmap? = null;
     }
@@ -108,7 +107,6 @@ class KuittiLisaysFragment : Fragment() {
         binding.btKalenteriin.setOnClickListener {
             it.findNavController().navigate(R.id.action_kuittiLisaysFragment_to_takuuPvmValitsinFragment)
         }
-        Log.d("testi", arguments?.getLong("date").toString())
 
         if(arguments?.getLong("date") == 0L) {
             if(takuuPvm == 0L) {
