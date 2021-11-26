@@ -16,8 +16,8 @@
 
 
         <ScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
@@ -44,7 +44,7 @@
                 <LinearLayout
                     android:id="@+id/linearLayoutHorizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="72dp"
+                    android:layout_height="wrap_content"
                     android:orientation="horizontal">
 
                     <ImageButton
@@ -83,9 +83,9 @@
                     android:hint="Tuotteen nimi tähän"
                     android:inputType="textPersonName"
                     android:minHeight="48dp"
-                    android:textStyle="bold"
+                    android:textColor="?android:textColorPrimary"
 
-                    android:textColor = "?android:textColorPrimary"/>
+                    android:textStyle="bold" />
 
                 <TextView
                     android:id="@+id/kalenteriTeksti"
@@ -93,29 +93,30 @@
                     android:layout_height="40sp"
                     android:text="Vaihda viimeinen takuupäivämäärä kalenterista:"
 
-                    android:textSize="18sp"
-                    android:textColor = "?android:textColorPrimary"/>
+                    android:textColor="?android:textColorPrimary"
+                    android:textSize="18sp" />
 
                 <LinearLayout
-                    android:layout_width="372dp"
-                    android:layout_height="79dp"
-                    android:orientation="horizontal">
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/txtValittuPvm"
-                        android:layout_width="223dp"
-                        android:layout_height="70dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:gravity="center_vertical"
                         android:text="Pvm:"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
 
-                        android:textColor = "?android:textColorPrimary"/>
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <ImageButton
                         android:id="@+id/btKalenteriin"
-                        android:layout_width="151dp"
-                        android:layout_height="72dp"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
                         android:backgroundTint="@color/purple_200"
                         android:scaleType="fitCenter"
                         app:srcCompat="@android:drawable/ic_menu_month"
@@ -132,6 +133,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
+                        android:insetBottom="20dp"
                         android:text="TAKAISIN"
                         android:textSize="20sp" />
 
@@ -141,6 +143,7 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:backgroundTint="@android:color/holo_green_light"
+                        android:insetBottom="20dp"
                         android:text="TALLENNA"
                         android:textSize="20sp" />
                 </LinearLayout>

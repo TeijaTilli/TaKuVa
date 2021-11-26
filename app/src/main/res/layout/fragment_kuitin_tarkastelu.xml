@@ -33,32 +33,35 @@
                     android:src="#dedede" />
 
 
-                <EditText
-                    android:id="@+id/txtTuotteenNimi"
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:inputType="textPersonName"
-                    android:text="Tuotteen nimi"
-                    android:textColor="?android:textColorPrimary"
-                    tools:inputType="none" />
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
-                <EditText
-                    android:id="@+id/txtPaivamaara"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:ems="10"
-                    android:enabled="false"
-                    android:inputType="date"
-                    android:text="Takuun viimeinen päivämäärä"
-                    android:textColor="?android:textColorPrimary"
-                    tools:inputType="none" />
+                    <TextView
+                        android:id="@+id/txtTuotteenNimi"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Tuotteen nimi"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="20sp" />
+
+                    <TextView
+                        android:id="@+id/txtPaivamaara"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="Takuun viimeinen päivämäärä"
+                        android:textColor="?android:textColorPrimary"
+                        android:textSize="20sp" />
+
+
+
+
+                </LinearLayout>
 
             </LinearLayout>
-
 
             <LinearLayout
                 android:id="@+id/linearLayout2"
